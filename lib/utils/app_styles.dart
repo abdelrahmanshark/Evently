@@ -83,6 +83,11 @@ class AppStyles {
     fontSize: 14,
     fontWeight: FontWeight.bold,
   );
+  static final TextStyle whiteBold12 = TextStyle(
+    color: AppColors.whiteColor,
+    fontSize: 12,
+    fontWeight: FontWeight.bold,
+  );
   static final TextStyle whiteBold20 = TextStyle(
     color: AppColors.whiteColor,
     fontSize: 20,

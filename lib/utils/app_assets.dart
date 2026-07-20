@@ -28,4 +28,5 @@ class AppAssets {
   static const String workShopDarkImage = 'assets/images/workshop_dark.png';
   static const String arabicFlag = 'assets/icons/EG.svg';
   static const String englishFlag = 'assets/icons/LR.svg';
+  static const String routeImage = 'assets/images/route_image.png';
 }
