@@ -61,5 +61,6 @@
   "edit_event": "تعديل الفعالية",
   "update_event": "تحديث الفعالية",
   "tap_on_location_to_select": "اضغط على الموقع للاختيار",
-  "logout": "تسجيل الخروج"
+  "logout": "تسجيل الخروج",
+  "favorite": "المفضلة"
 }

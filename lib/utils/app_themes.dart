@@ -7,6 +7,7 @@ class AppThemes {
   static final ThemeData lightTheme = ThemeData(
     cardColor: AppColors.primaryLightColor,
     canvasColor: AppColors.primaryDarkColor,
+      primaryColor: AppColors.primaryColor,
     scaffoldBackgroundColor: AppColors.primaryLightColor,
     extensions: [
       AppImages(
@@ -27,9 +28,23 @@ class AppThemes {
       headlineLarge: AppStyles.primaryBold20,
       headlineMedium: AppStyles.primaryMed20,
       bodyMedium: AppStyles.blackMed16,
+        bodyLarge: AppStyles.blackBold20
     ),
+      appBarTheme: AppBarTheme(
+        backgroundColor: AppColors.primaryColor,
+      ),
+      floatingActionButtonTheme: FloatingActionButtonThemeData(
+          backgroundColor: AppColors.primaryColor,
+          shape: StadiumBorder(
+              side: BorderSide(
+                  color: AppColors.whiteColor,
+                  width: 6
+              )
+          )
+      )
   );
   static final ThemeData darkTheme = ThemeData(
+      primaryColor: AppColors.primaryDarkColor,
     cardColor: AppColors.primaryDarkColor,
     canvasColor: AppColors.primaryLightColor,
     scaffoldBackgroundColor: AppColors.primaryDarkColor,
@@ -52,7 +67,20 @@ class AppThemes {
       headlineLarge: AppStyles.primaryBold20,
       headlineMedium: AppStyles.primaryMed20,
       bodyMedium: AppStyles.whiteMed16,
+        bodyLarge: AppStyles.whiteBold20
     ),
+      appBarTheme: AppBarTheme(
+        backgroundColor: AppColors.primaryColor,
+      ),
+      floatingActionButtonTheme: FloatingActionButtonThemeData(
+          backgroundColor: AppColors.primaryDarkColor,
+          shape: StadiumBorder(
+              side: BorderSide(
+                  color: AppColors.whiteColor,
+                  width: 6
+              )
+          )
+      )
   );
 }
 

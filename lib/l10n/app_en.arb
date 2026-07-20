@@ -61,6 +61,7 @@
   "edit_event": "Edit Event",
   "update_event": "Update Event",
   "tap_on_location_to_select": "Tap On Location To Select",
-  "logout": "Logout"
+  "logout": "Logout",
+  "favorite": "Favorite"
 }
 
