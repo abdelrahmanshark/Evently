@@ -1,0 +1,130 @@
+import 'package:evently/utils/app_assets.dart';
+import 'package:evently/utils/app_colors.dart';
+import 'package:evently/utils/app_styles.dart';
+import 'package:flutter/material.dart';
+
+class AppThemes {
+  static final ThemeData lightTheme = ThemeData(
+    cardColor: AppColors.primaryLightColor,
+    canvasColor: AppColors.primaryDarkColor,
+    scaffoldBackgroundColor: AppColors.primaryLightColor,
+    extensions: [
+      AppImages(
+        Birthday: AppAssets.birthdayLightImage,
+        BookClub: AppAssets.bookClubLightImage,
+        Eating: AppAssets.eatingLightImage,
+        Exhibition: AppAssets.exhibitionLightImage,
+        Gaming: AppAssets.gamingLightImage,
+        Holiday: AppAssets.holidayLightImage,
+        Meeting: AppAssets.meetingLightImage,
+        WorkShop: AppAssets.workShopLightImage,
+        Home: AppAssets.homeLightImage,
+        oB2: AppAssets.ob2LightImage,
+        oB3: AppAssets.ob3LightImage,
+      ),
+    ],
+    textTheme: TextTheme(
+      headlineLarge: AppStyles.primaryBold20,
+      headlineMedium: AppStyles.primaryMed20,
+      bodyMedium: AppStyles.blackMed16,
+    ),
+  );
+  static final ThemeData darkTheme = ThemeData(
+    cardColor: AppColors.primaryDarkColor,
+    canvasColor: AppColors.primaryLightColor,
+    scaffoldBackgroundColor: AppColors.primaryDarkColor,
+    extensions: [
+      AppImages(
+        Birthday: AppAssets.birthdayDarkImage,
+        BookClub: AppAssets.bookClubDarkImage,
+        Eating: AppAssets.eatingDarkImage,
+        Exhibition: AppAssets.exhibitionDarkImage,
+        Gaming: AppAssets.gamingDarkImage,
+        Holiday: AppAssets.holidayDarkImage,
+        Meeting: AppAssets.meetingDarkImage,
+        WorkShop: AppAssets.workShopDarkImage,
+        Home: AppAssets.homeDarkImage,
+        oB2: AppAssets.ob2DarkImage,
+        oB3: AppAssets.ob3DarkImage,
+      ),
+    ],
+    textTheme: TextTheme(
+      headlineLarge: AppStyles.primaryBold20,
+      headlineMedium: AppStyles.primaryMed20,
+      bodyMedium: AppStyles.whiteMed16,
+    ),
+  );
+}
+
+class AppImages extends ThemeExtension<AppImages> {
+  final String Birthday;
+
+  final String BookClub;
+
+  final String Eating;
+
+  final String Exhibition;
+
+  final String Gaming;
+
+  final String Holiday;
+
+  final String Meeting;
+
+  final String WorkShop;
+
+  final String Home;
+
+  final String oB2;
+
+  final String oB3;
+
+  AppImages({
+    required this.Birthday,
+    required this.BookClub,
+    required this.Eating,
+    required this.Exhibition,
+    required this.Gaming,
+    required this.Holiday,
+    required this.Meeting,
+    required this.WorkShop,
+    required this.Home,
+    required this.oB2,
+    required this.oB3,
+  });
+
+  @override
+  AppImages copyWith({
+    String? Birthday,
+    String? BookClub,
+    String? Eating,
+    String? Exhibition,
+    String? Gaming,
+    String? Holiday,
+    String? Meeting,
+    String? WorkShop,
+    String? Home,
+    String? oB2,
+    String? oB3,
+  }) {
+    return AppImages(
+      Birthday: Birthday ?? this.Birthday,
+      BookClub: BookClub ?? this.BookClub,
+      Eating: Eating ?? this.Eating,
+      Exhibition: Exhibition ?? this.Exhibition,
+      Gaming: Gaming ?? this.Gaming,
+      Holiday: Holiday ?? this.Holiday,
+      Meeting: Meeting ?? this.Meeting,
+      WorkShop: WorkShop ?? this.WorkShop,
+      Home: Home ?? this.Home,
+      oB2: oB2 ?? this.oB2,
+      oB3: oB3 ?? this.oB3,
+    );
+  }
+
+  @override
+  AppImages lerp(covariant ThemeExtension<AppImages>? other, double t) {
+    // TODO: implement lerp
+    return this;
+  }
+}
