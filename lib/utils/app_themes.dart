@@ -8,6 +8,8 @@ class AppThemes {
     cardColor: AppColors.primaryLightColor,
     canvasColor: AppColors.primaryDarkColor,
       primaryColor: AppColors.primaryColor,
+      dividerColor: AppColors.whiteColor,
+      focusColor: AppColors.primaryColor,
     scaffoldBackgroundColor: AppColors.primaryLightColor,
     extensions: [
       AppImages(
@@ -22,13 +24,17 @@ class AppThemes {
         Home: AppAssets.homeLightImage,
         oB2: AppAssets.ob2LightImage,
         oB3: AppAssets.ob3LightImage,
+          Sport: AppAssets.sportLightImage
       ),
     ],
     textTheme: TextTheme(
       headlineLarge: AppStyles.primaryBold20,
       headlineMedium: AppStyles.primaryMed20,
       bodyMedium: AppStyles.blackMed16,
-        bodyLarge: AppStyles.blackBold20
+        bodyLarge: AppStyles.blackBold20,
+        displayLarge: AppStyles.primaryBold14,
+        displayMedium: AppStyles.primaryMed16,
+        bodySmall: AppStyles.blackBold14
     ),
       appBarTheme: AppBarTheme(
         backgroundColor: AppColors.primaryColor,
@@ -47,6 +53,8 @@ class AppThemes {
       primaryColor: AppColors.primaryDarkColor,
     cardColor: AppColors.primaryDarkColor,
     canvasColor: AppColors.primaryLightColor,
+      dividerColor: AppColors.primaryColor,
+      focusColor: AppColors.whiteColor,
     scaffoldBackgroundColor: AppColors.primaryDarkColor,
     extensions: [
       AppImages(
@@ -61,13 +69,17 @@ class AppThemes {
         Home: AppAssets.homeDarkImage,
         oB2: AppAssets.ob2DarkImage,
         oB3: AppAssets.ob3DarkImage,
+          Sport: AppAssets.sportDarkImage
       ),
     ],
     textTheme: TextTheme(
       headlineLarge: AppStyles.primaryBold20,
       headlineMedium: AppStyles.primaryMed20,
       bodyMedium: AppStyles.whiteMed16,
-        bodyLarge: AppStyles.whiteBold20
+        bodyLarge: AppStyles.whiteBold20,
+        displayLarge: AppStyles.blackBold14,
+        displayMedium: AppStyles.whiteMed16,
+        bodySmall: AppStyles.whiteBold14
     ),
       appBarTheme: AppBarTheme(
         backgroundColor: AppColors.primaryColor,
@@ -86,6 +98,8 @@ class AppThemes {
 
 class AppImages extends ThemeExtension<AppImages> {
   final String Birthday;
+
+  final String Sport;
 
   final String BookClub;
 
@@ -119,6 +133,7 @@ class AppImages extends ThemeExtension<AppImages> {
     required this.Home,
     required this.oB2,
     required this.oB3,
+    required this.Sport
   });
 
   @override
@@ -134,6 +149,7 @@ class AppImages extends ThemeExtension<AppImages> {
     String? Home,
     String? oB2,
     String? oB3,
+    String? Sport
   }) {
     return AppImages(
       Birthday: Birthday ?? this.Birthday,
@@ -147,6 +163,7 @@ class AppImages extends ThemeExtension<AppImages> {
       Home: Home ?? this.Home,
       oB2: oB2 ?? this.oB2,
       oB3: oB3 ?? this.oB3,
+        Sport: Sport ?? this.Sport
     );
   }
 
