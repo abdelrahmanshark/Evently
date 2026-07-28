@@ -1,5 +1,6 @@
 // ignore: unused_import
 import 'package:intl/intl.dart' as intl;
+
 import 'app_localizations.dart';
 
 // ignore_for_file: type=lint
@@ -203,4 +204,29 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get favorite => 'Favorite';
+
+  @override
+  String get please_enter_an_email => 'please enter an email';
+
+  @override
+  String get please_enter_a_password => 'please enter a password';
+
+  @override
+  String get password_must_be_at_least_6_char =>
+      'password must be at least 6 char';
+
+  @override
+  String get re_password_dosnt_match => 're password dosen\'t match';
+
+  @override
+  String get please_enter_a_valid_email => 'please enter a valid email';
+
+  @override
+  String get please_enter_a_valid_password => 'please enter a valid password';
+
+  @override
+  String get name => 'Name';
+
+  @override
+  String get please_enter_your_name => 'please enter your name';
 }

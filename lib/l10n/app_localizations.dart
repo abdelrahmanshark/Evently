@@ -481,6 +481,54 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Favorite'**
   String get favorite;
+
+  /// No description provided for @please_enter_an_email.
+  ///
+  /// In en, this message translates to:
+  /// **'please enter an email'**
+  String get please_enter_an_email;
+
+  /// No description provided for @please_enter_a_password.
+  ///
+  /// In en, this message translates to:
+  /// **'please enter a password'**
+  String get please_enter_a_password;
+
+  /// No description provided for @password_must_be_at_least_6_char.
+  ///
+  /// In en, this message translates to:
+  /// **'password must be at least 6 char'**
+  String get password_must_be_at_least_6_char;
+
+  /// No description provided for @re_password_dosnt_match.
+  ///
+  /// In en, this message translates to:
+  /// **'re password dosen\'t match'**
+  String get re_password_dosnt_match;
+
+  /// No description provided for @please_enter_a_valid_email.
+  ///
+  /// In en, this message translates to:
+  /// **'please enter a valid email'**
+  String get please_enter_a_valid_email;
+
+  /// No description provided for @please_enter_a_valid_password.
+  ///
+  /// In en, this message translates to:
+  /// **'please enter a valid password'**
+  String get please_enter_a_valid_password;
+
+  /// No description provided for @name.
+  ///
+  /// In en, this message translates to:
+  /// **'Name'**
+  String get name;
+
+  /// No description provided for @please_enter_your_name.
+  ///
+  /// In en, this message translates to:
+  /// **'please enter your name'**
+  String get please_enter_your_name;
 }
 
 class _AppLocalizationsDelegate

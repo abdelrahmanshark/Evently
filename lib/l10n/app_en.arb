@@ -62,6 +62,14 @@
   "update_event": "Update Event",
   "tap_on_location_to_select": "Tap On Location To Select",
   "logout": "Logout",
-  "favorite": "Favorite"
+  "favorite": "Favorite",
+  "please_enter_an_email": "please enter an email",
+  "please_enter_a_password": "please enter a password",
+  "password_must_be_at_least_6_char": "password must be at least 6 char",
+  "re_password_dosnt_match": "re password dosen't match",
+  "please_enter_a_valid_email": "please enter a valid email",
+  "please_enter_a_valid_password": "please enter a valid password",
+  "name": "Name",
+  "please_enter_your_name": "please enter your name"
 }
 
