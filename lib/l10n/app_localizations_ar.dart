@@ -204,4 +204,29 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get favorite => 'المفضلة';
+
+  @override
+  String get please_enter_an_email => 'يرجى إدخال البريد الإلكتروني';
+
+  @override
+  String get please_enter_a_password => 'يرجى إدخال كلمة المرور';
+
+  @override
+  String get password_must_be_at_least_6_char =>
+      'يجب أن تتكون كلمة المرور من 6 أحرف على الأقل';
+
+  @override
+  String get re_password_dosnt_match => 'كلمة المرور غير متطابقة';
+
+  @override
+  String get please_enter_a_valid_email => 'يرجى إدخال بريد إلكتروني صالح';
+
+  @override
+  String get please_enter_a_valid_password => 'يرجى إدخال كلمة مرور صالحة';
+
+  @override
+  String get name => 'الاسم';
+
+  @override
+  String get please_enter_your_name => 'يرجى كتابة الاسم';
 }

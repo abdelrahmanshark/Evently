@@ -2,6 +2,7 @@ class AppRoutes {
   static const String initScreenRouteName = 'initScreen';
   static const String introScreensRouteName = 'introScreens';
   static const String loginScreensRouteName = 'Login Screen';
+  static const String registerScreensRouteName = 'Register Screen';
   static const String profileTabRouteName = 'Profile tab';
   static const String homeScreenRouteName = 'Home Screen';
 }

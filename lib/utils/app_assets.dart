@@ -29,4 +29,5 @@ class AppAssets {
   static const String arabicFlag = 'assets/icons/EG.svg';
   static const String englishFlag = 'assets/icons/LR.svg';
   static const String routeImage = 'assets/images/route_image.png';
+  static const String eventlyLogo = 'assets/images/app_logo.png';
 }
