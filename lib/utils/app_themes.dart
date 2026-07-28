@@ -10,6 +10,7 @@ class AppThemes {
       primaryColor: AppColors.primaryColor,
       dividerColor: AppColors.whiteColor,
       focusColor: AppColors.primaryColor,
+      disabledColor: AppColors.grayColor,
     scaffoldBackgroundColor: AppColors.primaryLightColor,
     extensions: [
       AppImages(
@@ -34,7 +35,8 @@ class AppThemes {
         bodyLarge: AppStyles.blackBold20,
         displayLarge: AppStyles.primaryBold14,
         displayMedium: AppStyles.primaryMed16,
-        bodySmall: AppStyles.blackBold14
+        bodySmall: AppStyles.blackBold14,
+        labelSmall: AppStyles.grayMed16
     ),
       appBarTheme: AppBarTheme(
         backgroundColor: AppColors.primaryColor,
@@ -47,14 +49,20 @@ class AppThemes {
                   width: 6
               )
           )
-      )
-  );
+      ),
+      textSelectionTheme: TextSelectionThemeData(
+        cursorColor: AppColors.primaryColor,
+        selectionColor: AppColors.primaryColor,
+        selectionHandleColor: AppColors.primaryColor,
+
+      ));
   static final ThemeData darkTheme = ThemeData(
       primaryColor: AppColors.primaryDarkColor,
     cardColor: AppColors.primaryDarkColor,
     canvasColor: AppColors.primaryLightColor,
       dividerColor: AppColors.primaryColor,
       focusColor: AppColors.whiteColor,
+      disabledColor: AppColors.primaryColor,
     scaffoldBackgroundColor: AppColors.primaryDarkColor,
     extensions: [
       AppImages(
@@ -79,7 +87,8 @@ class AppThemes {
         bodyLarge: AppStyles.whiteBold20,
         displayLarge: AppStyles.blackBold14,
         displayMedium: AppStyles.whiteMed16,
-        bodySmall: AppStyles.whiteBold14
+        bodySmall: AppStyles.whiteBold14,
+        labelSmall: AppStyles.whiteMed16
     ),
       appBarTheme: AppBarTheme(
         backgroundColor: AppColors.primaryColor,
@@ -92,6 +101,12 @@ class AppThemes {
                   width: 6
               )
           )
+      ),
+      textSelectionTheme: TextSelectionThemeData(
+        cursorColor: AppColors.primaryColor,
+        selectionColor: AppColors.primaryColor,
+        selectionHandleColor: AppColors.primaryColor,
+
       )
   );
 }
