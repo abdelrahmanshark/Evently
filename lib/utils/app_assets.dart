@@ -14,8 +14,8 @@ class AppAssets {
   static const String eatingLightImage = 'assets/images/eating_light.png';
   static const String eatingDarkImage = 'assets/images/eating_dark.png';
   static const String exhibitionLightImage =
-      'assets/images/exhibition_light.png';
-  static const String exhibitionDarkImage = 'assets/images/Exhibition_dark.png';
+      'assets/images/Exhibition_light.png';
+  static const String exhibitionDarkImage = 'assets/images/exhibition_dark.png';
   static const String gamingLightImage = 'assets/images/gaming_light.png';
   static const String gamingDarkImage = 'assets/images/gaming_dark.png';
   static const String holidayLightImage = 'assets/images/holiday_light.png';

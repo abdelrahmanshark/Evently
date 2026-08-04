@@ -6,12 +6,13 @@ class EventTabBar extends StatelessWidget {
   String eventName;
   IconData eventIcon;
   bool isSelected;
-
+  bool isItAddEvent;
   EventTabBar({
     super.key,
     required this.eventName,
     required this.eventIcon,
     this.isSelected = false,
+    this.isItAddEvent = false
   });
 
   @override
@@ -22,20 +23,28 @@ class EventTabBar extends StatelessWidget {
       margin: EdgeInsets.symmetric(vertical: 10),
       padding: EdgeInsets.symmetric(horizontal: 15, vertical: 3),
       decoration: BoxDecoration(
-        color: isSelected ? theme.dividerColor : Colors.transparent,
+        color: isItAddEvent ? isSelected ? AppColors.primaryColor : Colors
+            .transparent : isSelected ? theme.dividerColor : Colors.transparent,
         borderRadius: BorderRadius.circular(46),
-        border: Border.all(color: theme.dividerColor, width: 2),
+        border: Border.all(
+            color: isItAddEvent ? AppColors.primaryColor : theme.dividerColor,
+            width: 2),
       ),
       child: Row(
         children: [
           Icon(
             eventIcon,
-            color: isSelected ? theme.focusColor : AppColors.whiteColor,
+            color: isItAddEvent ? isSelected ? theme.cardColor : AppColors
+                .primaryColor
+                :
+            isSelected ? theme.focusColor : AppColors.whiteColor,
           ),
           SizedBox(width: 6),
           Text(
             eventName,
-            style: isSelected ? textStyle.displayMedium : AppStyles.whiteMed16,
+            style: isItAddEvent ? isSelected ? textStyle.labelMedium : AppStyles
+                .primaryBold16 :
+            isSelected ? textStyle.displayMedium : AppStyles.whiteMed16,
           ),
         ],
       ),

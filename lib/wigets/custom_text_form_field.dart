@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 typedef OnValidator = String? Function(String?);
 
 class CustomTextFormField extends StatelessWidget {
+  final int? maxLines;
   final String? hintText;
   final TextStyle? hintStyle;
   final IconData? prefixIcon;
@@ -13,7 +14,7 @@ class CustomTextFormField extends StatelessWidget {
   final Color? prefixIconColor;
   final Color? suffixIconColor;
   final OnValidator onValidator;
-
+  final EdgeInsetsGeometry? padding;
   final TextStyle? errorStyle;
   final Color? outLineBorderColor;
   final TextEditingController? controller;
@@ -36,6 +37,8 @@ class CustomTextFormField extends StatelessWidget {
     this.controller,
     this.obscureText = false,
     this.obscureChar,
+    this.padding,
+    this.maxLines,
   });
 
   @override
@@ -43,7 +46,10 @@ class CustomTextFormField extends StatelessWidget {
     final theme = Theme.of(context);
     final textStyle = theme.textTheme;
     return TextFormField(
+      maxLines: maxLines,
+      textAlignVertical: TextAlignVertical.top,
       decoration: InputDecoration(
+        contentPadding: padding,
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(16),
           borderSide: BorderSide(

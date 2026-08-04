@@ -70,6 +70,12 @@
   "please_enter_a_valid_email": "please enter a valid email",
   "please_enter_a_valid_password": "please enter a valid password",
   "name": "Name",
-  "please_enter_your_name": "please enter your name"
+  "please_enter_your_name": "please enter your name",
+  "done": "Done",
+  "please_enter_event_title": "please enter event title",
+  "please_enter_event_discription": "please enter event discription",
+  "please_enter_event_date": "please enter event date",
+  "please_enter_event_time": "please enter event time"
+
 }
 

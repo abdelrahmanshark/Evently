@@ -229,4 +229,19 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get please_enter_your_name => 'يرجى كتابة الاسم';
+
+  @override
+  String get done => 'تم';
+
+  @override
+  String get please_enter_event_title => 'برجاء ادخال عنوان للفعالية';
+
+  @override
+  String get please_enter_event_discription => 'برجاء ادخال وصف للفعالية';
+
+  @override
+  String get please_enter_event_date => 'برجاء ادخال تاريخ الفعالية';
+
+  @override
+  String get please_enter_event_time => 'برجاء ادخال وقت الفعالية';
 }

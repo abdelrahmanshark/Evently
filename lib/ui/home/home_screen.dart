@@ -4,6 +4,7 @@ import 'package:evently/ui/home/tabs/home_tab/home_tab.dart';
 import 'package:evently/ui/home/tabs/map_tab/map_tab.dart';
 import 'package:evently/ui/home/tabs/profile/profile_tab.dart';
 import 'package:evently/utils/app_colors.dart';
+import 'package:evently/utils/app_routes.dart';
 import 'package:evently/utils/app_styles.dart';
 import 'package:flutter/material.dart';
 
@@ -40,6 +41,7 @@ class _HomeScreenState extends State<HomeScreen> {
     final text = AppLocalizations.of(context)!;
     labels = [text.home, text.map, text.favorite, text.profile];
     return Scaffold(
+      extendBody: true,
       body: tabs[currentIndex],
       bottomNavigationBar: AnimatedBottomNavigationBar.builder(
         itemCount: selectedIcons.length,
@@ -71,10 +73,13 @@ class _HomeScreenState extends State<HomeScreen> {
         backgroundColor: Theme.of(context).primaryColor,
         notchMargin: 12,
         borderColor: AppColors.whiteColor,
-        borderWidth: 6,
+        borderWidth: 3,
+        elevation: 0,
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          Navigator.of(context).pushNamed(AppRoutes.addEventScreenRouteName);
+        },
         child: Icon(Icons.add, color: AppColors.whiteColor, size: 30),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,

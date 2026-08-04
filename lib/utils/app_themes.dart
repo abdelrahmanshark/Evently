@@ -36,10 +36,12 @@ class AppThemes {
         displayLarge: AppStyles.primaryBold14,
         displayMedium: AppStyles.primaryMed16,
         bodySmall: AppStyles.blackBold14,
-        labelSmall: AppStyles.grayMed16
+        labelSmall: AppStyles.grayMed16,
+        labelMedium: AppStyles.whiteMed16
     ),
       appBarTheme: AppBarTheme(
         backgroundColor: AppColors.primaryColor,
+        iconTheme: IconThemeData(color: AppColors.primaryColor),
       ),
       floatingActionButtonTheme: FloatingActionButtonThemeData(
           backgroundColor: AppColors.primaryColor,
@@ -88,10 +90,13 @@ class AppThemes {
         displayLarge: AppStyles.blackBold14,
         displayMedium: AppStyles.whiteMed16,
         bodySmall: AppStyles.whiteBold14,
-        labelSmall: AppStyles.whiteMed16
+        labelSmall: AppStyles.whiteMed16,
+        labelMedium: AppStyles.blackMed16
+
     ),
       appBarTheme: AppBarTheme(
         backgroundColor: AppColors.primaryColor,
+        iconTheme: IconThemeData(color: AppColors.primaryColor),
       ),
       floatingActionButtonTheme: FloatingActionButtonThemeData(
           backgroundColor: AppColors.primaryDarkColor,
