@@ -2,6 +2,7 @@ import 'package:evently/providers/app_local_provider.dart';
 import 'package:evently/providers/app_theme_provider.dart';
 import 'package:evently/ui/authentication/login/login_screen.dart';
 import 'package:evently/ui/authentication/register/register_screen.dart';
+import 'package:evently/ui/home/add_event/add_event.dart';
 import 'package:evently/ui/home/home_screen.dart';
 import 'package:evently/ui/home/tabs/profile/profile_tab.dart';
 import 'package:evently/ui/on_boarding/init_screen/init_screen.dart';
@@ -62,6 +63,7 @@ class Evently extends StatelessWidget {
         AppRoutes.profileTabRouteName: (context) => ProfileTab(),
         AppRoutes.homeScreenRouteName: (context) => HomeScreen(),
         AppRoutes.registerScreensRouteName: (context) => RegisterScreen(),
+        AppRoutes.addEventScreenRouteName: (context) => AddEvent(),
       },
     );
   }

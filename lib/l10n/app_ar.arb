@@ -70,5 +70,10 @@
   "please_enter_a_valid_email": "يرجى إدخال بريد إلكتروني صالح",
   "please_enter_a_valid_password": "يرجى إدخال كلمة مرور صالحة",
   "name": "الاسم",
-  "please_enter_your_name": "يرجى كتابة الاسم"
+  "please_enter_your_name": "يرجى كتابة الاسم",
+  "done": "تم",
+  "please_enter_event_title": "برجاء ادخال عنوان للفعالية",
+  "please_enter_event_discription": "برجاء ادخال وصف للفعالية",
+  "please_enter_event_date": "برجاء ادخال تاريخ الفعالية",
+  "please_enter_event_time": "برجاء ادخال وقت الفعالية"
 }

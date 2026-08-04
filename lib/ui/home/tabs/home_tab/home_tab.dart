@@ -107,7 +107,7 @@ class _HomeTabState extends State<HomeTab> {
                     tabs:
                     eventsTabItems.map((e) =>
                         EventTabBar(
-                          eventName: e.eventName, eventIcon: e.eventIcon,
+                          eventName: e.eventName, eventIcon: e.eventIcon!,
                           isSelected: currentIndex == eventsTabItems.indexOf(e),
                         ),).toList()
                     ,

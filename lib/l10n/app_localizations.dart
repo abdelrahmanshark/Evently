@@ -529,6 +529,36 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'please enter your name'**
   String get please_enter_your_name;
+
+  /// No description provided for @done.
+  ///
+  /// In en, this message translates to:
+  /// **'Done'**
+  String get done;
+
+  /// No description provided for @please_enter_event_title.
+  ///
+  /// In en, this message translates to:
+  /// **'please enter event title'**
+  String get please_enter_event_title;
+
+  /// No description provided for @please_enter_event_discription.
+  ///
+  /// In en, this message translates to:
+  /// **'please enter event discription'**
+  String get please_enter_event_discription;
+
+  /// No description provided for @please_enter_event_date.
+  ///
+  /// In en, this message translates to:
+  /// **'please enter event date'**
+  String get please_enter_event_date;
+
+  /// No description provided for @please_enter_event_time.
+  ///
+  /// In en, this message translates to:
+  /// **'please enter event time'**
+  String get please_enter_event_time;
 }
 
 class _AppLocalizationsDelegate
