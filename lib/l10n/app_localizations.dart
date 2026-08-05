@@ -559,6 +559,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'please enter event time'**
   String get please_enter_event_time;
+
+  /// No description provided for @event_added.
+  ///
+  /// In en, this message translates to:
+  /// **'Event Added'**
+  String get event_added;
+
+  /// No description provided for @event_added_to_favorite.
+  ///
+  /// In en, this message translates to:
+  /// **'Event Added to favorite'**
+  String get event_added_to_favorite;
+
+  /// No description provided for @event_removed_from_favorite.
+  ///
+  /// In en, this message translates to:
+  /// **'Event Remove From Favorite'**
+  String get event_removed_from_favorite;
 }
 
 class _AppLocalizationsDelegate

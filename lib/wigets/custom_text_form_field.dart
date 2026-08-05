@@ -13,13 +13,14 @@ class CustomTextFormField extends StatelessWidget {
   final bool hasSuffixIcon;
   final Color? prefixIconColor;
   final Color? suffixIconColor;
-  final OnValidator onValidator;
+  final OnValidator? onValidator;
   final EdgeInsetsGeometry? padding;
   final TextStyle? errorStyle;
   final Color? outLineBorderColor;
   final TextEditingController? controller;
   final bool? obscureText;
   final String? obscureChar;
+  void Function(String)? onChange;
 
   CustomTextFormField({
     super.key,
@@ -31,7 +32,7 @@ class CustomTextFormField extends StatelessWidget {
     this.hasSuffixIcon = false,
     this.prefixIconColor,
     this.suffixIconColor,
-    required this.onValidator,
+    this.onValidator,
     this.errorStyle,
     this.outLineBorderColor,
     this.controller,
@@ -39,6 +40,7 @@ class CustomTextFormField extends StatelessWidget {
     this.obscureChar,
     this.padding,
     this.maxLines,
+    this.onChange
   });
 
   @override
@@ -84,6 +86,7 @@ class CustomTextFormField extends StatelessWidget {
       obscureText: obscureText!,
       obscuringCharacter: obscureChar ?? '.',
       cursorColor: AppColors.primaryColor,
+      onChanged: onChange,
     );
   }
 }

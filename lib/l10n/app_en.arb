@@ -75,7 +75,10 @@
   "please_enter_event_title": "please enter event title",
   "please_enter_event_discription": "please enter event discription",
   "please_enter_event_date": "please enter event date",
-  "please_enter_event_time": "please enter event time"
+  "please_enter_event_time": "please enter event time",
+  "event_added": "Event Added",
+  "event_added_to_favorite": "Event Added to favorite",
+  "event_removed_from_favorite": "Event Remove From Favorite"
 
 }
 
