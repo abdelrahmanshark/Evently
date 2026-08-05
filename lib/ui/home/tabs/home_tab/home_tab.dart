@@ -1,11 +1,13 @@
 import 'package:evently/l10n/app_localizations.dart';
 import 'package:evently/models/events.dart';
+import 'package:evently/models/events_tab_item.dart';
 import 'package:evently/providers/app_local_provider.dart';
 import 'package:evently/providers/app_theme_provider.dart';
 import 'package:evently/ui/home/tabs/home_tab/widgets/event_item.dart';
 import 'package:evently/ui/home/tabs/home_tab/widgets/event_tab_bar.dart';
 import 'package:evently/utils/app_colors.dart';
 import 'package:evently/utils/app_styles.dart';
+import 'package:evently/utils/fire_base_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -13,11 +15,20 @@ class HomeTab extends StatefulWidget {
   HomeTab({super.key});
 
   @override
-  State<HomeTab> createState() => _HomeTabState();
+  State<HomeTab> createState() => HomeTabState();
 }
 
-class _HomeTabState extends State<HomeTab> {
+class HomeTabState extends State<HomeTab> {
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    getAllEvents();
+  }
+
+  List<Event> eventsList = [];
   int currentIndex = 0;
+  List<EventTabItem> eventsTabItems = [];
   @override
   Widget build(BuildContext context) {
     final text = AppLocalizations.of(context)!;
@@ -31,7 +42,7 @@ class _HomeTabState extends State<HomeTab> {
         .of(context)
         .size
         .height;
-    List<EventTabItem> eventsTabItems = [
+    eventsTabItems = [
       EventTabItem(eventName: text.all, eventIcon: Icons.explore_outlined),
       EventTabItem(eventName: text.sport, eventIcon: Icons.directions_bike),
       EventTabItem(eventName: text.birthday, eventIcon: Icons.cake_outlined),
@@ -107,7 +118,7 @@ class _HomeTabState extends State<HomeTab> {
                     tabs:
                     eventsTabItems.map((e) =>
                         EventTabBar(
-                          eventName: e.eventName, eventIcon: e.eventIcon!,
+                          eventName: e.eventName, eventIcon: e.eventIcon,
                           isSelected: currentIndex == eventsTabItems.indexOf(e),
                         ),).toList()
                     ,
@@ -120,6 +131,7 @@ class _HomeTabState extends State<HomeTab> {
                     onTap: (index) {
                       setState(() {
                         currentIndex = index;
+                        getAllEvents();
                       });
                     },
                   ),
@@ -127,25 +139,82 @@ class _HomeTabState extends State<HomeTab> {
               ],
             ),
           ),
+          eventsList.isEmpty ? SizedBox() :
           Expanded(
             child: ListView.builder(
-                itemBuilder: (context, index) => EventItem(),
-                itemCount: 8),
+                itemBuilder: (context, index) =>
+                    EventItem(event: eventsList[index],),
+                itemCount: eventsList.length),
           )
         ],
       ),
     );
-  }
 
+  }
   bool isEnglish(BuildContext context) {
     return Provider
         .of<AppLocalProvider>(context)
         .appLocal == 'en';
   }
-
   bool isLight(BuildContext context) {
     return Provider
         .of<AppThemeProvider>(context)
         .appTheme == ThemeMode.light;
   }
+
+  void getAllEvents() {
+    FireBaseUtils.getFireBaseCollection().snapshots().listen((event) {
+      setState(() {
+        List<Event> allEvents = event.docs.map((event) {
+          return event.data();
+        },).toList();
+        allEvents.sort((event1, event2) {
+          return event1.eventDate!.compareTo(event2.eventDate!);
+        },);
+        if (currentIndex == 0) {
+          eventsList = allEvents;
+        }
+        else {
+          eventsList = allEvents.where((event) {
+            return event.eventName == eventsTabItems[currentIndex].eventName;
+          },).toList();
+        }
+      });
+    },);
+  }
+/*  void getAllEvents()  {
+      FireBaseUtils.getFireBaseCollection().snapshots().listen((event) {
+      setState(() {
+        eventsList = event.docs.map((doc) {
+          return doc.data();
+        },).toList();
+      });
+      print(event.docs.length);
+
+    },);
+
+
+
+  }*/
+/*  Future<void> getAllEvents() async {
+    try {
+      print("Before Firestore");
+
+      var eventCollection =
+      await FireBaseUtils.getFireBaseCollection().snapshots();
+
+      print("After Firestore");
+      print(eventCollection.length);
+
+      setState(() async {
+        eventsList = await eventCollection.map((e) => e.data()).toList();
+      });
+    } catch (e, s) {
+      print("Firestore Error: $e");
+      print(s);
+    }
+  }*/
+
+
 }
+

@@ -1,6 +1,5 @@
 // ignore: unused_import
 import 'package:intl/intl.dart' as intl;
-
 import 'app_localizations.dart';
 
 // ignore_for_file: type=lint
@@ -244,4 +243,13 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get please_enter_event_time => 'please enter event time';
+
+  @override
+  String get event_added => 'Event Added';
+
+  @override
+  String get event_added_to_favorite => 'Event Added to favorite';
+
+  @override
+  String get event_removed_from_favorite => 'Event Remove From Favorite';
 }

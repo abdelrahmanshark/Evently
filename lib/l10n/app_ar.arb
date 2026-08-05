@@ -75,5 +75,8 @@
   "please_enter_event_title": "برجاء ادخال عنوان للفعالية",
   "please_enter_event_discription": "برجاء ادخال وصف للفعالية",
   "please_enter_event_date": "برجاء ادخال تاريخ الفعالية",
-  "please_enter_event_time": "برجاء ادخال وقت الفعالية"
+  "please_enter_event_time": "برجاء ادخال وقت الفعالية",
+  "event_added": "تمت اضافة الفعالية",
+  "event_added_to_favorite": "تمت اضافة الفعالية للمفضلة",
+  "event_removed_from_favorite": "تمت ازالة الفعالية من المضفلة"
 }

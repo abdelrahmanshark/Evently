@@ -10,14 +10,19 @@ import 'package:evently/ui/on_boarding/intro_screens/introduction_screens.dart';
 import 'package:evently/utils/app_routes.dart';
 import 'package:evently/utils/app_themes.dart';
 import 'package:evently/utils/shared_preferences.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'firebase_options.dart';
 import 'l10n/app_localizations.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   bool isSeen = await chackedIsIntroSeen();
   runApp(
     MultiProvider(

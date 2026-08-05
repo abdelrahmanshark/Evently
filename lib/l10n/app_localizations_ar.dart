@@ -1,6 +1,5 @@
 // ignore: unused_import
 import 'package:intl/intl.dart' as intl;
-
 import 'app_localizations.dart';
 
 // ignore_for_file: type=lint
@@ -244,4 +243,13 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get please_enter_event_time => 'برجاء ادخال وقت الفعالية';
+
+  @override
+  String get event_added => 'تمت اضافة الفعالية';
+
+  @override
+  String get event_added_to_favorite => 'تمت اضافة الفعالية للمفضلة';
+
+  @override
+  String get event_removed_from_favorite => 'تمت ازالة الفعالية من المضفلة';
 }

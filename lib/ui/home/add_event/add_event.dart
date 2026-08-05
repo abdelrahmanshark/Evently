@@ -1,16 +1,18 @@
 import 'dart:ui' as ui;
 
 import 'package:easy_date_timeline/easy_date_timeline.dart';
+import 'package:evently/models/events.dart';
 import 'package:evently/ui/home/add_event/widgets/choose_date_or_time.dart';
 import 'package:evently/utils/app_colors.dart';
 import 'package:evently/utils/app_styles.dart';
+import 'package:evently/utils/fire_base_utils.dart';
 import 'package:evently/wigets/custom_elevated_button.dart';
 import 'package:evently/wigets/custom_text_form_field.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:wheel_picker/wheel_picker.dart';
 
-import '../../../models/events.dart';
+import '../../../models/events_tab_item.dart';
 import '../../../utils/app_const.dart';
 import '../tabs/home_tab/widgets/event_tab_bar.dart';
 
@@ -22,12 +24,18 @@ class AddEvent extends StatefulWidget {
 }
 
 class _AddEventState extends State<AddEvent> {
+  String selectedImage = '';
+  String selectedName = '';
   int selectedIndex = 0;
   DateTime? selectedDate;
   TimeOfDay? selectedTime;
   String formattedDate = '';
   String formattedTimne = '';
+  TextEditingController? titleController = TextEditingController();
+  TextEditingController? descriptionController = TextEditingController();
   final formKey = GlobalKey<FormState>();
+
+  @override
 
   @override
   @override
@@ -79,7 +87,8 @@ class _AddEventState extends State<AddEvent> {
       appConst.text.workShop: appConst.image.WorkShop,
       appConst.text.book_club: appConst.image.BookClub,
     };
-
+    selectedImage = eventImages[eventsTabItems[selectedIndex].eventName]!;
+    selectedName = eventsTabItems[selectedIndex].eventName;
     return Scaffold(
       appBar: AppBar(
         title: Text(appConst.text.create_event, style: AppStyles.primaryMed20),
@@ -127,6 +136,7 @@ class _AddEventState extends State<AddEvent> {
               ),
               Text(appConst.text.title, style: appConst.textStyle.bodyMedium),
               CustomTextFormField(
+                controller: titleController,
                 prefixIcon: Icons.edit_note_rounded,
                 hintText: appConst.text.event_title,
                 onValidator: (value) {
@@ -141,6 +151,7 @@ class _AddEventState extends State<AddEvent> {
                 style: appConst.textStyle.bodyMedium,
               ),
               CustomTextFormField(
+                controller: descriptionController,
                 hasPrefixIcon: false,
                 maxLines: 3,
                 hintText: appConst.text.event_description,
@@ -353,7 +364,7 @@ class _AddEventState extends State<AddEvent> {
     );
   }
 
-  void addEvent() {
+  void addEvent() async {
     var appConst = AppConst(context);
     if (selectedTime == null) {
       ScaffoldMessenger.of(context).showSnackBar(
@@ -374,7 +385,19 @@ class _AddEventState extends State<AddEvent> {
       return;
     }
     if (formKey.currentState!.validate()) {
-      setState(() {});
+      Event event = Event(
+          eventImage: selectedImage,
+          eventName: selectedName,
+          eventTime: formattedTimne,
+          eventDate: selectedDate!,
+          eventTitle: titleController!.text,
+          eventDescrption: descriptionController!.text);
+      await FireBaseUtils.setEvent(event);
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          content: Text(appConst.text.event_added),
+          backgroundColor: AppColors.primaryColor
+      ));
+      Navigator.of(context).pop();
     }
   }
 }

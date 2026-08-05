@@ -1,13 +1,21 @@
+import 'package:evently/models/events.dart';
 import 'package:evently/utils/app_colors.dart';
+import 'package:evently/utils/app_const.dart';
 import 'package:evently/utils/app_styles.dart';
 import 'package:evently/utils/app_themes.dart';
+import 'package:evently/utils/fire_base_utils.dart';
+import 'package:evently/utils/toast.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class EventItem extends StatelessWidget {
-  const EventItem({super.key});
+  Event event;
+
+  EventItem({super.key, required this.event});
 
   @override
   Widget build(BuildContext context) {
+    final appConst = AppConst(context);
     final theme = Theme.of(context);
     final image = Theme.of(context).extension<AppImages>()!;
     final textStyle = theme.textTheme;
@@ -18,7 +26,7 @@ class EventItem extends StatelessWidget {
       height: height * .3,
       decoration: BoxDecoration(
         image: DecorationImage(
-          image: AssetImage(image.Sport),
+          image: AssetImage(event.eventImage!),
           fit: BoxFit.fill,
         ),
         borderRadius: BorderRadius.circular(16),
@@ -38,8 +46,10 @@ class EventItem extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Text('22', style: AppStyles.primaryBold20),
-                Text("NOV", style: AppStyles.primaryBold14),
+                Text(event.eventDate!.day.toString(),
+                    style: AppStyles.primaryBold20),
+                Text(DateFormat("MMM").format(event.eventDate!),
+                    style: AppStyles.primaryBold14),
               ],
             ),
           ),
@@ -56,14 +66,25 @@ class EventItem extends StatelessWidget {
               children: [
                 Expanded(
                   child: Text(
-                    "this is sport event",
+                    event.eventTitle!,
                     style: textStyle.bodySmall,
                   ),
                 ),
                 Spacer(),
                 IconButton(
-                  onPressed: () {},
-                  icon: Icon(Icons.favorite, color: AppColors.primaryColor),
+                  onPressed: () {
+                    FireBaseUtils.getFireBaseCollection().doc(event.id).update({
+                      'isFavorite': !event.isFavorite!
+                    }).then((_) {
+                      FlutterToast(
+                          text: !event.isFavorite! ? appConst.text
+                              .event_added_to_favorite :
+                          appConst.text.event_removed_from_favorite
+                      ).showFlutterToast();
+                    },);
+                  },
+                  icon: Icon(event.isFavorite! ? Icons.favorite : Icons
+                      .favorite_border, color: AppColors.primaryColor),
                 ),
               ],
             ),
