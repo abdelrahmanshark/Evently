@@ -3,16 +3,13 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 class Event {
   String? id;
   String? eventName;
-  String? eventImage;
   String? eventTitle;
   String? eventDescrption;
   DateTime? eventDate;
   String? eventTime;
   bool? isFavorite;
-
   Event({
     this.id = '',
-    required this.eventImage,
     required this.eventTime,
     required this.eventDate,
     required this.eventTitle,
@@ -28,7 +25,6 @@ class Event {
     eventDescrption = data['eventDescrption'];
     eventDate = (data['eventDate'] as Timestamp).toDate();
     eventTime = data['eventTime'];
-    eventImage = data['eventImage'];
     isFavorite = data['isFavorite'];
   }
 
@@ -36,7 +32,6 @@ class Event {
     return {
       'id': id,
       'eventName': eventName,
-      'eventImage': eventImage,
       'eventTitle': eventTitle,
       'eventDescrption': eventDescrption,
       'eventDate': eventDate,

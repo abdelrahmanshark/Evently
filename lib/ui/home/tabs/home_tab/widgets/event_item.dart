@@ -10,12 +10,14 @@ import 'package:intl/intl.dart';
 
 class EventItem extends StatelessWidget {
   Event event;
+  String imagePath = '';
 
   EventItem({super.key, required this.event});
 
   @override
   Widget build(BuildContext context) {
-    final appConst = AppConst(context);
+    getImagePath(context);
+    var appConst = AppConst(context);
     final theme = Theme.of(context);
     final image = Theme.of(context).extension<AppImages>()!;
     final textStyle = theme.textTheme;
@@ -26,7 +28,7 @@ class EventItem extends StatelessWidget {
       height: height * .3,
       decoration: BoxDecoration(
         image: DecorationImage(
-          image: AssetImage(event.eventImage!),
+          image: AssetImage(imagePath),
           fit: BoxFit.fill,
         ),
         borderRadius: BorderRadius.circular(16),
@@ -92,5 +94,39 @@ class EventItem extends StatelessWidget {
         ],
       ),
     );
+
   }
+
+  void getImagePath(BuildContext context) {
+    var appConst = AppConst(context);
+
+    Map<String, String> images = {
+      'sport': appConst.image.sport,
+      'birthday': appConst.image.birthday,
+      'meeting': appConst.image.meeting,
+      'gaming': appConst.image.gaming,
+      'eating': appConst.image.eating,
+      'holiday': appConst.image.holiday,
+      'exhibition': appConst.image.exhibition,
+      'workShop': appConst.image.workShop,
+      'book_club': appConst.image.bookClub,
+    };
+
+    imagePath = images[event.eventName] ?? '';
+  }
+/*  void getImagePath(BuildContext context){
+
+    var appConst = AppConst(context);
+    print("Event Name = ${event.eventName}");
+    print("Sport Text = ${appConst.text.sport}");
+    if(event.eventName == appConst.text.sport){imagePath = appConst.image.sport;}
+    else if(event.eventName == appConst.text.birthday){imagePath = appConst.image.birthday;}
+    else if(event.eventName == appConst.text.workShop){imagePath = appConst.image.workShop;}
+    else if(event.eventName == appConst.text.book_club){imagePath = appConst.image.bookClub;}
+    else if(event.eventName == appConst.text.exhibition){imagePath = appConst.image.exhibition;}
+    else if(event.eventName == appConst.text.meeting){imagePath = appConst.image.meeting;}
+    else if(event.eventName == appConst.text.gaming){imagePath = appConst.image.gaming;}
+    else if(event.eventName == appConst.text.eating){imagePath = appConst.image.eating;}
+    else if(event.eventName == appConst.text.holiday){imagePath = appConst.image.holiday;}
+  }*/
 }
