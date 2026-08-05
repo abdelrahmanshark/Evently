@@ -41,6 +41,18 @@ class _AddEventState extends State<AddEvent> {
   @override
   Widget build(BuildContext context) {
     var appConst = AppConst(context);
+    List<String> eventsCategories = [
+      'sport',
+      'birthday',
+      'meeting',
+      'gaming',
+      'eating',
+      'holiday',
+      'exhibition',
+      'workShop',
+      'book_club',
+    ];
+    selectedName = eventsCategories[selectedIndex];
     List<EventTabItem> eventsTabItems = [
       EventTabItem(
         eventName: appConst.text.sport,
@@ -77,18 +89,18 @@ class _AddEventState extends State<AddEvent> {
       ),
     ];
     Map<String, String> eventImages = {
-      appConst.text.sport: appConst.image.Sport,
-      appConst.text.birthday: appConst.image.Birthday,
-      appConst.text.meeting: appConst.image.Meeting,
-      appConst.text.gaming: appConst.image.Gaming,
-      appConst.text.eating: appConst.image.Eating,
-      appConst.text.holiday: appConst.image.Holiday,
-      appConst.text.exhibition: appConst.image.Exhibition,
-      appConst.text.workShop: appConst.image.WorkShop,
-      appConst.text.book_club: appConst.image.BookClub,
+      appConst.text.sport: appConst.image.sport,
+      appConst.text.birthday: appConst.image.birthday,
+      appConst.text.meeting: appConst.image.meeting,
+      appConst.text.gaming: appConst.image.gaming,
+      appConst.text.eating: appConst.image.eating,
+      appConst.text.holiday: appConst.image.holiday,
+      appConst.text.exhibition: appConst.image.exhibition,
+      appConst.text.workShop: appConst.image.workShop,
+      appConst.text.book_club: appConst.image.bookClub,
     };
     selectedImage = eventImages[eventsTabItems[selectedIndex].eventName]!;
-    selectedName = eventsTabItems[selectedIndex].eventName;
+
     return Scaffold(
       appBar: AppBar(
         title: Text(appConst.text.create_event, style: AppStyles.primaryMed20),
@@ -386,7 +398,6 @@ class _AddEventState extends State<AddEvent> {
     }
     if (formKey.currentState!.validate()) {
       Event event = Event(
-          eventImage: selectedImage,
           eventName: selectedName,
           eventTime: formattedTimne,
           eventDate: selectedDate!,
