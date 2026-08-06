@@ -6,6 +6,7 @@ import 'package:evently/providers/app_theme_provider.dart';
 import 'package:evently/ui/home/tabs/home_tab/widgets/event_item.dart';
 import 'package:evently/ui/home/tabs/home_tab/widgets/event_tab_bar.dart';
 import 'package:evently/utils/app_colors.dart';
+import 'package:evently/utils/app_const.dart';
 import 'package:evently/utils/app_styles.dart';
 import 'package:evently/utils/fire_base_utils.dart';
 import 'package:flutter/material.dart';
@@ -31,6 +32,7 @@ class HomeTabState extends State<HomeTab> {
   List<EventTabItem> eventsTabItems = [];
   @override
   Widget build(BuildContext context) {
+    AppConst appConst = AppConst(context);
     final text = AppLocalizations.of(context)!;
     final textStyle = Theme
         .of(context)
@@ -68,7 +70,8 @@ class HomeTabState extends State<HomeTab> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(text.welcome_back, style: AppStyles.whiteMed14,),
-                Text("john swfat", style: AppStyles.whiteBold24,)
+                Text(appConst.myUserProvider.currentUser?.name ?? '',
+                  style: AppStyles.whiteBold24,)
               ],
             ),
             Spacer(),
@@ -139,6 +142,7 @@ class HomeTabState extends State<HomeTab> {
               ],
             ),
           ),
+
           eventsList.isEmpty ? SizedBox() :
           Expanded(
             child: ListView.builder(
@@ -163,7 +167,7 @@ class HomeTabState extends State<HomeTab> {
   }
 
   void getAllEvents() {
-    FireBaseUtils.getFireBaseCollection().snapshots().listen((event) {
+    FireBaseUtils.getFireBaseEventsCollection().snapshots().listen((event) {
       setState(() {
         List<Event> allEvents = event.docs.map((event) {
           return event.data();

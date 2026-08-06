@@ -1,7 +1,10 @@
+import 'package:evently/ui/authentication/login/login_screen.dart';
 import 'package:evently/ui/home/tabs/profile/widgets/drop_down_menu_language.dart';
 import 'package:evently/ui/home/tabs/profile/widgets/drop_down_menu_theme.dart';
 import 'package:evently/utils/app_assets.dart';
 import 'package:evently/utils/app_colors.dart';
+import 'package:evently/utils/app_const.dart';
+import 'package:evently/utils/app_routes.dart';
 import 'package:evently/utils/app_styles.dart';
 import 'package:evently/wigets/custom_elevated_button.dart';
 import 'package:flutter/material.dart';
@@ -22,6 +25,7 @@ class ProfileTab extends StatefulWidget {
 class _ProfileTabState extends State<ProfileTab> {
   @override
   Widget build(BuildContext context) {
+    AppConst appConst = AppConst(context);
     final theme = Theme.of(context);
     final image = theme.extension<AppImages>();
     final text = AppLocalizations.of(context)!;
@@ -57,10 +61,12 @@ class _ProfileTabState extends State<ProfileTab> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('John Safwat', style: AppStyles.whiteBold24),
-                  SizedBox(height: 6),
                   Text(
-                    "johnsafwat.route@gmaiwww.com",
+                    appConst.myUserProvider.currentUser?.name ?? '',
+                    style: AppStyles.whiteBold24,
+                  )SizedBox(height: 6),
+                  Text(
+                    appConst.myUserProvider.currentUser?.email ?? '',
                     style: AppStyles.whiteMed16,
                     softWrap: true,
                     maxLines: 3, // أو احذفيها لو عايزاه ينزل لأكتر من سطر
@@ -85,9 +91,19 @@ class _ProfileTabState extends State<ProfileTab> {
             Text(text.theme, style: textStyle.bodyLarge),
             SizedBox(height: 10),
             DropDownMenuThemeWiget(),
+            SizedBox(height: 20),
+            CustomElevatedButton(
+                onPressed: () {
+                  Navigator.pushNamed(context, AppRoutes.myEventsRouteName);
+                },
+                child: Text(text.go_to_my_events, style: textStyle.bodyLarge,)),
             Spacer(),
             CustomElevatedButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.pushAndRemoveUntil(context,
+                  MaterialPageRoute(builder: (context) => LoginScreen(),), (
+                      route) => false,);
+              },
               child: Row(
                 children: [
                   Icon(Icons.exit_to_app, color: AppColors.whiteColor),

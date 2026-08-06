@@ -84,7 +84,9 @@
   "login_Successfully": "Login Successfully",
   "the_password_provided_is_too_weak": "The password provided is too weak",
   "the_account_already_exists_for_that_email": "The account already exists for that email.",
-  "wrong_email_or_password": "Wrong email or password"
+  "wrong_email_or_password": "Wrong email or password",
+  "go_to_my_events": "Go to my event",
+  "my_event": "My Events"
 
 }
 

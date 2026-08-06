@@ -1,3 +1,4 @@
+import 'package:evently/providers/my_user_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -20,6 +21,8 @@ class AppConst {
   TextTheme get textStyle => theme.textTheme;
 
   AppThemeProvider get themeProvider => Provider.of<AppThemeProvider>(context);
+
+  MyUserProvider get myUserProvider => Provider.of<MyUserProvider>(context);
 
   AppLocalProvider get localProvider => Provider.of<AppLocalProvider>(context);
 

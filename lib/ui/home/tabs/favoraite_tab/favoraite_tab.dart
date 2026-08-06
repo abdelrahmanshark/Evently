@@ -65,7 +65,7 @@ class _FavoriteTabState extends State<FavoriteTab> {
   }
 
   void getFavoriteEvents() {
-    FireBaseUtils.getFireBaseCollection().snapshots().listen(
+    FireBaseUtils.getFireBaseEventsCollection().snapshots().listen(
           (event) {
         setState(() {
           favoriteEventList = event.docs.map((event) {

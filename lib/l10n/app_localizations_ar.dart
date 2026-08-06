@@ -273,4 +273,10 @@ class AppLocalizationsAr extends AppLocalizations {
   @override
   String get wrong_email_or_password =>
       'البريد الالكتروني أو كلمة المرور غير صحيحين';
+
+  @override
+  String get go_to_my_events => 'الانتقال الى فعالياتي ';
+
+  @override
+  String get my_event => 'فعالياتي';
 }

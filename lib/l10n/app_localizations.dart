@@ -613,6 +613,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Wrong email or password'**
   String get wrong_email_or_password;
+
+  /// No description provided for @go_to_my_events.
+  ///
+  /// In en, this message translates to:
+  /// **'Go to my event'**
+  String get go_to_my_events;
+
+  /// No description provided for @my_event.
+  ///
+  /// In en, this message translates to:
+  /// **'My Events'**
+  String get my_event;
 }
 
 class _AppLocalizationsDelegate
