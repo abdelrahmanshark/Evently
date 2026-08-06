@@ -2,6 +2,7 @@ import 'dart:ui' as ui;
 
 import 'package:easy_date_timeline/easy_date_timeline.dart';
 import 'package:evently/models/events.dart';
+import 'package:evently/providers/my_user_provider.dart';
 import 'package:evently/ui/home/add_event/widgets/choose_date_or_time.dart';
 import 'package:evently/utils/app_colors.dart';
 import 'package:evently/utils/app_styles.dart';
@@ -10,6 +11,7 @@ import 'package:evently/wigets/custom_elevated_button.dart';
 import 'package:evently/wigets/custom_text_form_field.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 import 'package:wheel_picker/wheel_picker.dart';
 
 import '../../../models/events_tab_item.dart';
@@ -397,6 +399,7 @@ class _AddEventState extends State<AddEvent> {
       return;
     }
     if (formKey.currentState!.validate()) {
+      var myUserProvider = Provider.of<MyUserProvider>(context, listen: false);
       Event event = Event(
           eventName: selectedName,
           eventTime: formattedTimne,
@@ -404,6 +407,7 @@ class _AddEventState extends State<AddEvent> {
           eventTitle: titleController!.text,
           eventDescrption: descriptionController!.text);
       await FireBaseUtils.setEvent(event);
+      await FireBaseUtils.setUserEvent(myUserProvider.currentUser!.id!, event);
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
           content: Text(appConst.text.event_added),
           backgroundColor: AppColors.primaryColor

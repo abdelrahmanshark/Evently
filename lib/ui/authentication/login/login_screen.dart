@@ -1,10 +1,13 @@
 import 'package:animated_toggle_switch/animated_toggle_switch.dart';
 import 'package:evently/l10n/app_localizations.dart';
+import 'package:evently/models/user.dart';
+import 'package:evently/providers/my_user_provider.dart';
 import 'package:evently/ui/home/home_screen.dart';
 import 'package:evently/utils/app_assets.dart';
 import 'package:evently/utils/app_colors.dart';
 import 'package:evently/utils/app_routes.dart';
 import 'package:evently/utils/app_styles.dart';
+import 'package:evently/utils/fire_base_utils.dart';
 import 'package:evently/wigets/custom_alert_dialog.dart';
 import 'package:evently/wigets/custom_elevated_button.dart';
 import 'package:evently/wigets/custom_text_form_field.dart';
@@ -220,6 +223,7 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   void Login() async {
+    var myUserProvider = Provider.of<MyUserProvider>(context, listen: false);
     var appConst = AppConst(context);
     if (formKey.currentState!.validate()) {
       setState(() {});
@@ -231,6 +235,13 @@ class _LoginScreenState extends State<LoginScreen> {
             email: emailController.text,
             password: passwordController.text
         );
+        if (credential.user?.uid == null) {
+          CustomAlertDialog.hideLoading(context: context);
+          return;
+        }
+        MyUsers newUser = await FireBaseUtils.getUser(
+            userId: credential.user!.uid);
+        myUserProvider.updateUser(newUser);
         CustomAlertDialog.hideLoading(context: context);
         CustomAlertDialog.showMsg(
             context: context, msg: appConst.text.login_Successfully);

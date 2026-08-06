@@ -84,5 +84,7 @@
   "login_Successfully": "تم تسجيل الدخول بنجاح",
   "the_password_provided_is_too_weak": "كلمة المرور ضعيفة",
   "the_account_already_exists_for_that_email": "هذا البريد الالكتروني مسجل بالفعل",
-  "wrong_email_or_password": "البريد الالكتروني أو كلمة المرور غير صحيحين"
+  "wrong_email_or_password": "البريد الالكتروني أو كلمة المرور غير صحيحين",
+  "go_to_my_events": "الانتقال الى فعالياتي ",
+  "my_event": "فعالياتي"
 }

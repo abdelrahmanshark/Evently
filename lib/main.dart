@@ -1,9 +1,11 @@
 import 'package:evently/providers/app_local_provider.dart';
 import 'package:evently/providers/app_theme_provider.dart';
+import 'package:evently/providers/my_user_provider.dart';
 import 'package:evently/ui/authentication/login/login_screen.dart';
 import 'package:evently/ui/authentication/register/register_screen.dart';
 import 'package:evently/ui/home/add_event/add_event.dart';
 import 'package:evently/ui/home/home_screen.dart';
+import 'package:evently/ui/home/tabs/profile/my_events.dart';
 import 'package:evently/ui/home/tabs/profile/profile_tab.dart';
 import 'package:evently/ui/on_boarding/init_screen/init_screen.dart';
 import 'package:evently/ui/on_boarding/intro_screens/introduction_screens.dart';
@@ -29,6 +31,7 @@ void main() async {
       providers: [
         ChangeNotifierProvider(create: (_) => AppLocalProvider()),
         ChangeNotifierProvider(create: (_) => AppThemeProvider()),
+        ChangeNotifierProvider(create: (_) => MyUserProvider()),
       ],
       child: Evently(isSeen: isSeen),
     ),
@@ -69,6 +72,7 @@ class Evently extends StatelessWidget {
         AppRoutes.homeScreenRouteName: (context) => HomeScreen(),
         AppRoutes.registerScreensRouteName: (context) => RegisterScreen(),
         AppRoutes.addEventScreenRouteName: (context) => AddEvent(),
+        AppRoutes.myEventsRouteName: (context) => MyEvents(),
       },
     );
   }

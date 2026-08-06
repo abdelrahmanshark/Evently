@@ -6,4 +6,5 @@ class AppRoutes {
   static const String profileTabRouteName = 'Profile tab';
   static const String homeScreenRouteName = 'Home Screen';
   static const String addEventScreenRouteName = 'Add Event Screen';
+  static const String myEventsRouteName = 'My Events';
 }

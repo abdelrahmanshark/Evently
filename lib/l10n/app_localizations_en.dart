@@ -273,4 +273,10 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get wrong_email_or_password => 'Wrong email or password';
+
+  @override
+  String get go_to_my_events => 'Go to my event';
+
+  @override
+  String get my_event => 'My Events';
 }

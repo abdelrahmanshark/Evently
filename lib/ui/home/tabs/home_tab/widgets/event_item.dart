@@ -11,8 +11,9 @@ import 'package:intl/intl.dart';
 class EventItem extends StatelessWidget {
   Event event;
   String imagePath = '';
+  bool isItMyEvent;
 
-  EventItem({super.key, required this.event});
+  EventItem({super.key, required this.event, this.isItMyEvent = false});
 
   @override
   Widget build(BuildContext context) {
@@ -57,6 +58,7 @@ class EventItem extends StatelessWidget {
           ),
           Spacer(),
           Container(
+            height: 40,
             padding: EdgeInsets.symmetric(horizontal: 3, vertical: 2),
             margin: EdgeInsets.symmetric(horizontal: 7, vertical: 9),
             decoration: BoxDecoration(
@@ -73,9 +75,13 @@ class EventItem extends StatelessWidget {
                   ),
                 ),
                 Spacer(),
+                isItMyEvent ? SizedBox() :
                 IconButton(
                   onPressed: () {
-                    FireBaseUtils.getFireBaseCollection().doc(event.id).update({
+                    FireBaseUtils
+                        .getFireBaseEventsCollection()
+                        .doc(event.id)
+                        .update({
                       'isFavorite': !event.isFavorite!
                     }).then((_) {
                       FlutterToast(
