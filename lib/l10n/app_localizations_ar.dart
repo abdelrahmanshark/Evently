@@ -1,5 +1,6 @@
 // ignore: unused_import
 import 'package:intl/intl.dart' as intl;
+
 import 'app_localizations.dart';
 
 // ignore_for_file: type=lint
@@ -252,4 +253,24 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get event_removed_from_favorite => 'تمت ازالة الفعالية من المضفلة';
+
+  @override
+  String get loading => 'يتم التحميل';
+
+  @override
+  String get register_Successfully => 'تم تسجيل الحساب بنجاح';
+
+  @override
+  String get login_Successfully => 'تم تسجيل الدخول بنجاح';
+
+  @override
+  String get the_password_provided_is_too_weak => 'كلمة المرور ضعيفة';
+
+  @override
+  String get the_account_already_exists_for_that_email =>
+      'هذا البريد الالكتروني مسجل بالفعل';
+
+  @override
+  String get wrong_email_or_password =>
+      'البريد الالكتروني أو كلمة المرور غير صحيحين';
 }

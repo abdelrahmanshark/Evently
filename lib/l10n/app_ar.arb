@@ -78,5 +78,11 @@
   "please_enter_event_time": "برجاء ادخال وقت الفعالية",
   "event_added": "تمت اضافة الفعالية",
   "event_added_to_favorite": "تمت اضافة الفعالية للمفضلة",
-  "event_removed_from_favorite": "تمت ازالة الفعالية من المضفلة"
+  "event_removed_from_favorite": "تمت ازالة الفعالية من المضفلة",
+  "loading": "يتم التحميل",
+  "register_Successfully": "تم تسجيل الحساب بنجاح",
+  "login_Successfully": "تم تسجيل الدخول بنجاح",
+  "the_password_provided_is_too_weak": "كلمة المرور ضعيفة",
+  "the_account_already_exists_for_that_email": "هذا البريد الالكتروني مسجل بالفعل",
+  "wrong_email_or_password": "البريد الالكتروني أو كلمة المرور غير صحيحين"
 }

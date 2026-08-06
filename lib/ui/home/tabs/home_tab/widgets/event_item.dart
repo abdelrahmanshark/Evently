@@ -3,8 +3,8 @@ import 'package:evently/utils/app_colors.dart';
 import 'package:evently/utils/app_const.dart';
 import 'package:evently/utils/app_styles.dart';
 import 'package:evently/utils/app_themes.dart';
+import 'package:evently/utils/custom_toast.dart';
 import 'package:evently/utils/fire_base_utils.dart';
-import 'package:evently/utils/toast.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
