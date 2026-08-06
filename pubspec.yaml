@@ -45,6 +45,12 @@ dependencies:
   animated_toggle_switch: ^0.8.7
   flutter_svg: ^2.2.0
   animated_bottom_navigation_bar: ^1.4.0
+  wheel_picker: ^0.3.0
+  easy_date_timeline: ^2.0.9
+  firebase_core: ^4.13.0
+  cloud_firestore: ^6.8.0
+  fluttertoast: ^9.0.0
+  firebase_auth: ^6.5.7
 dev_dependencies:
   flutter_test:
     sdk: flutter

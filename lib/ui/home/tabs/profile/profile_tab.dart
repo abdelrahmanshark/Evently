@@ -1,8 +1,12 @@
+import 'package:evently/ui/authentication/login/login_screen.dart';
 import 'package:evently/ui/home/tabs/profile/widgets/drop_down_menu_language.dart';
 import 'package:evently/ui/home/tabs/profile/widgets/drop_down_menu_theme.dart';
 import 'package:evently/utils/app_assets.dart';
 import 'package:evently/utils/app_colors.dart';
+import 'package:evently/utils/app_const.dart';
+import 'package:evently/utils/app_routes.dart';
 import 'package:evently/utils/app_styles.dart';
+import 'package:evently/wigets/custom_elevated_button.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -21,6 +25,7 @@ class ProfileTab extends StatefulWidget {
 class _ProfileTabState extends State<ProfileTab> {
   @override
   Widget build(BuildContext context) {
+    AppConst appConst = AppConst(context);
     final theme = Theme.of(context);
     final image = theme.extension<AppImages>();
     final text = AppLocalizations.of(context)!;
@@ -36,27 +41,32 @@ class _ProfileTabState extends State<ProfileTab> {
           borderRadius: BorderRadius.only(bottomLeft: Radius.circular(64)),
         ),
         title: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             ClipRRect(
               borderRadius: BorderRadius.only(
                 bottomLeft: Radius.circular(1000),
                 bottomRight: Radius.circular(1000),
-                topRight: Radius.circular(1000),
-                topLeft: Radius.circular(24),
+                topRight: localProvider.appLocal == "ar"
+                    ? Radius.circular(24)
+                    : Radius.circular(1000),
+                topLeft: localProvider.appLocal == "en"
+                    ? Radius.circular(24)
+                    : Radius.circular(1000),
               ),
               child: Image.asset(AppAssets.routeImage),
               clipBehavior: Clip.antiAlias,
             ),
-            SizedBox(width: 7),
+            SizedBox(width: 10),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('John Safwat', style: AppStyles.whiteBold24),
-                  SizedBox(height: 6),
                   Text(
-                    "johnsafwat.route@gmaiwww.com",
+                    appConst.myUserProvider.currentUser?.name ?? '',
+                    style: AppStyles.whiteBold24,
+                  )SizedBox(height: 6),
+                  Text(
+                    appConst.myUserProvider.currentUser?.email ?? '',
                     style: AppStyles.whiteMed16,
                     softWrap: true,
                     maxLines: 3, // أو احذفيها لو عايزاه ينزل لأكتر من سطر
@@ -81,29 +91,32 @@ class _ProfileTabState extends State<ProfileTab> {
             Text(text.theme, style: textStyle.bodyLarge),
             SizedBox(height: 10),
             DropDownMenuThemeWiget(),
+            SizedBox(height: 20),
+            CustomElevatedButton(
+                onPressed: () {
+                  Navigator.pushNamed(context, AppRoutes.myEventsRouteName);
+                },
+                child: Text(text.go_to_my_events, style: textStyle.bodyLarge,)),
+            Spacer(),
+            CustomElevatedButton(
+              onPressed: () {
+                Navigator.pushAndRemoveUntil(context,
+                  MaterialPageRoute(builder: (context) => LoginScreen(),), (
+                      route) => false,);
+              },
+              child: Row(
+                children: [
+                  Icon(Icons.exit_to_app, color: AppColors.whiteColor),
+                  SizedBox(width: 10),
+                  Text(text.logout, style: AppStyles.whiteMed20),
+                ],
+              ),
+              backGroundColor: AppColors.elevatedButtonRedColor,
+            ),
           ],
         ),
       ),
-      bottomNavigationBar: Padding(
-        padding: EdgeInsetsGeometry.symmetric(horizontal: 15, vertical: 35),
-        child: ElevatedButton(
-          onPressed: () {},
-          child: Row(
-            children: [
-              Icon(Icons.exit_to_app, color: AppColors.whiteColor),
-              SizedBox(width: 10),
-              Text(text.logout, style: AppStyles.whiteMed20),
-            ],
-          ),
-          style: ElevatedButton.styleFrom(
-            backgroundColor: AppColors.elevatedButtonRedColor,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(16),
-            ),
-            padding: EdgeInsetsGeometry.all(13),
-          ),
-        ),
-      ),
+      bottomNavigationBar: SizedBox(height: 100),
     );
   }
 }

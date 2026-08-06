@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 typedef OnValidator = String? Function(String?);
 
 class CustomTextFormField extends StatelessWidget {
+  final int? maxLines;
   final String? hintText;
   final TextStyle? hintStyle;
   final IconData? prefixIcon;
@@ -12,13 +13,14 @@ class CustomTextFormField extends StatelessWidget {
   final bool hasSuffixIcon;
   final Color? prefixIconColor;
   final Color? suffixIconColor;
-  final OnValidator onValidator;
-
+  final OnValidator? onValidator;
+  final EdgeInsetsGeometry? padding;
   final TextStyle? errorStyle;
   final Color? outLineBorderColor;
   final TextEditingController? controller;
   final bool? obscureText;
   final String? obscureChar;
+  void Function(String)? onChange;
 
   CustomTextFormField({
     super.key,
@@ -30,12 +32,15 @@ class CustomTextFormField extends StatelessWidget {
     this.hasSuffixIcon = false,
     this.prefixIconColor,
     this.suffixIconColor,
-    required this.onValidator,
+    this.onValidator,
     this.errorStyle,
     this.outLineBorderColor,
     this.controller,
     this.obscureText = false,
     this.obscureChar,
+    this.padding,
+    this.maxLines,
+    this.onChange
   });
 
   @override
@@ -43,7 +48,10 @@ class CustomTextFormField extends StatelessWidget {
     final theme = Theme.of(context);
     final textStyle = theme.textTheme;
     return TextFormField(
+      maxLines: maxLines,
+      textAlignVertical: TextAlignVertical.top,
       decoration: InputDecoration(
+        contentPadding: padding,
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(16),
           borderSide: BorderSide(
@@ -78,6 +86,7 @@ class CustomTextFormField extends StatelessWidget {
       obscureText: obscureText!,
       obscuringCharacter: obscureChar ?? '.',
       cursorColor: AppColors.primaryColor,
+      onChanged: onChange,
     );
   }
 }

@@ -1,13 +1,24 @@
+import 'package:evently/models/events.dart';
 import 'package:evently/utils/app_colors.dart';
+import 'package:evently/utils/app_const.dart';
 import 'package:evently/utils/app_styles.dart';
 import 'package:evently/utils/app_themes.dart';
+import 'package:evently/utils/custom_toast.dart';
+import 'package:evently/utils/fire_base_utils.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class EventItem extends StatelessWidget {
-  const EventItem({super.key});
+  Event event;
+  String imagePath = '';
+  bool isItMyEvent;
+
+  EventItem({super.key, required this.event, this.isItMyEvent = false});
 
   @override
   Widget build(BuildContext context) {
+    getImagePath(context);
+    var appConst = AppConst(context);
     final theme = Theme.of(context);
     final image = Theme.of(context).extension<AppImages>()!;
     final textStyle = theme.textTheme;
@@ -18,7 +29,7 @@ class EventItem extends StatelessWidget {
       height: height * .3,
       decoration: BoxDecoration(
         image: DecorationImage(
-          image: AssetImage(image.Sport),
+          image: AssetImage(imagePath),
           fit: BoxFit.fill,
         ),
         borderRadius: BorderRadius.circular(16),
@@ -38,13 +49,16 @@ class EventItem extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Text('22', style: AppStyles.primaryBold20),
-                Text("NOV", style: AppStyles.primaryBold14),
+                Text(event.eventDate!.day.toString(),
+                    style: AppStyles.primaryBold20),
+                Text(DateFormat("MMM").format(event.eventDate!),
+                    style: AppStyles.primaryBold14),
               ],
             ),
           ),
           Spacer(),
           Container(
+            height: 40,
             padding: EdgeInsets.symmetric(horizontal: 3, vertical: 2),
             margin: EdgeInsets.symmetric(horizontal: 7, vertical: 9),
             decoration: BoxDecoration(
@@ -56,14 +70,29 @@ class EventItem extends StatelessWidget {
               children: [
                 Expanded(
                   child: Text(
-                    "this is sport event",
+                    event.eventTitle!,
                     style: textStyle.bodySmall,
                   ),
                 ),
                 Spacer(),
+                isItMyEvent ? SizedBox() :
                 IconButton(
-                  onPressed: () {},
-                  icon: Icon(Icons.favorite, color: AppColors.primaryColor),
+                  onPressed: () {
+                    FireBaseUtils
+                        .getFireBaseEventsCollection()
+                        .doc(event.id)
+                        .update({
+                      'isFavorite': !event.isFavorite!
+                    }).then((_) {
+                      FlutterToast(
+                          text: !event.isFavorite! ? appConst.text
+                              .event_added_to_favorite :
+                          appConst.text.event_removed_from_favorite
+                      ).showFlutterToast();
+                    },);
+                  },
+                  icon: Icon(event.isFavorite! ? Icons.favorite : Icons
+                      .favorite_border, color: AppColors.primaryColor),
                 ),
               ],
             ),
@@ -71,5 +100,39 @@ class EventItem extends StatelessWidget {
         ],
       ),
     );
+
   }
+
+  void getImagePath(BuildContext context) {
+    var appConst = AppConst(context);
+
+    Map<String, String> images = {
+      'sport': appConst.image.sport,
+      'birthday': appConst.image.birthday,
+      'meeting': appConst.image.meeting,
+      'gaming': appConst.image.gaming,
+      'eating': appConst.image.eating,
+      'holiday': appConst.image.holiday,
+      'exhibition': appConst.image.exhibition,
+      'workShop': appConst.image.workShop,
+      'book_club': appConst.image.bookClub,
+    };
+
+    imagePath = images[event.eventName] ?? '';
+  }
+/*  void getImagePath(BuildContext context){
+
+    var appConst = AppConst(context);
+    print("Event Name = ${event.eventName}");
+    print("Sport Text = ${appConst.text.sport}");
+    if(event.eventName == appConst.text.sport){imagePath = appConst.image.sport;}
+    else if(event.eventName == appConst.text.birthday){imagePath = appConst.image.birthday;}
+    else if(event.eventName == appConst.text.workShop){imagePath = appConst.image.workShop;}
+    else if(event.eventName == appConst.text.book_club){imagePath = appConst.image.bookClub;}
+    else if(event.eventName == appConst.text.exhibition){imagePath = appConst.image.exhibition;}
+    else if(event.eventName == appConst.text.meeting){imagePath = appConst.image.meeting;}
+    else if(event.eventName == appConst.text.gaming){imagePath = appConst.image.gaming;}
+    else if(event.eventName == appConst.text.eating){imagePath = appConst.image.eating;}
+    else if(event.eventName == appConst.text.holiday){imagePath = appConst.image.holiday;}
+  }*/
 }

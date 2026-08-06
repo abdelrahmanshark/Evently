@@ -102,7 +102,7 @@ class _InitScreenState extends State<InitScreen> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Image.asset(AppAssets.eventlyHeader),
-              Image.asset(image!.Home, fit: BoxFit.cover),
+              Image.asset(image!.home, fit: BoxFit.cover),
               Text(
                 text.home_title,
                 style: textStyle.headlineLarge,

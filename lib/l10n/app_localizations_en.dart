@@ -229,4 +229,54 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get please_enter_your_name => 'please enter your name';
+
+  @override
+  String get done => 'Done';
+
+  @override
+  String get please_enter_event_title => 'please enter event title';
+
+  @override
+  String get please_enter_event_discription => 'please enter event discription';
+
+  @override
+  String get please_enter_event_date => 'please enter event date';
+
+  @override
+  String get please_enter_event_time => 'please enter event time';
+
+  @override
+  String get event_added => 'Event Added';
+
+  @override
+  String get event_added_to_favorite => 'Event Added to favorite';
+
+  @override
+  String get event_removed_from_favorite => 'Event Remove From Favorite';
+
+  @override
+  String get loading => 'Loading';
+
+  @override
+  String get register_Successfully => 'Register Successfully';
+
+  @override
+  String get login_Successfully => 'Login Successfully';
+
+  @override
+  String get the_password_provided_is_too_weak =>
+      'The password provided is too weak';
+
+  @override
+  String get the_account_already_exists_for_that_email =>
+      'The account already exists for that email.';
+
+  @override
+  String get wrong_email_or_password => 'Wrong email or password';
+
+  @override
+  String get go_to_my_events => 'Go to my event';
+
+  @override
+  String get my_event => 'My Events';
 }

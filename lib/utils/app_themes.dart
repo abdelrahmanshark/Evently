@@ -14,18 +14,18 @@ class AppThemes {
     scaffoldBackgroundColor: AppColors.primaryLightColor,
     extensions: [
       AppImages(
-        Birthday: AppAssets.birthdayLightImage,
-        BookClub: AppAssets.bookClubLightImage,
-        Eating: AppAssets.eatingLightImage,
-        Exhibition: AppAssets.exhibitionLightImage,
-        Gaming: AppAssets.gamingLightImage,
-        Holiday: AppAssets.holidayLightImage,
-        Meeting: AppAssets.meetingLightImage,
-        WorkShop: AppAssets.workShopLightImage,
-        Home: AppAssets.homeLightImage,
+          birthday: AppAssets.birthdayLightImage,
+          bookClub: AppAssets.bookClubLightImage,
+          eating: AppAssets.eatingLightImage,
+          exhibition: AppAssets.exhibitionLightImage,
+          gaming: AppAssets.gamingLightImage,
+          holiday: AppAssets.holidayLightImage,
+          meeting: AppAssets.meetingLightImage,
+          workShop: AppAssets.workShopLightImage,
+          home: AppAssets.homeLightImage,
         oB2: AppAssets.ob2LightImage,
         oB3: AppAssets.ob3LightImage,
-          Sport: AppAssets.sportLightImage
+          sport: AppAssets.sportLightImage
       ),
     ],
     textTheme: TextTheme(
@@ -36,10 +36,12 @@ class AppThemes {
         displayLarge: AppStyles.primaryBold14,
         displayMedium: AppStyles.primaryMed16,
         bodySmall: AppStyles.blackBold14,
-        labelSmall: AppStyles.grayMed16
+        labelSmall: AppStyles.grayMed16,
+        labelMedium: AppStyles.whiteMed16
     ),
       appBarTheme: AppBarTheme(
         backgroundColor: AppColors.primaryColor,
+        iconTheme: IconThemeData(color: AppColors.primaryColor),
       ),
       floatingActionButtonTheme: FloatingActionButtonThemeData(
           backgroundColor: AppColors.primaryColor,
@@ -66,18 +68,18 @@ class AppThemes {
     scaffoldBackgroundColor: AppColors.primaryDarkColor,
     extensions: [
       AppImages(
-        Birthday: AppAssets.birthdayDarkImage,
-        BookClub: AppAssets.bookClubDarkImage,
-        Eating: AppAssets.eatingDarkImage,
-        Exhibition: AppAssets.exhibitionDarkImage,
-        Gaming: AppAssets.gamingDarkImage,
-        Holiday: AppAssets.holidayDarkImage,
-        Meeting: AppAssets.meetingDarkImage,
-        WorkShop: AppAssets.workShopDarkImage,
-        Home: AppAssets.homeDarkImage,
+          birthday: AppAssets.birthdayDarkImage,
+          bookClub: AppAssets.bookClubDarkImage,
+          eating: AppAssets.eatingDarkImage,
+          exhibition: AppAssets.exhibitionDarkImage,
+          gaming: AppAssets.gamingDarkImage,
+          holiday: AppAssets.holidayDarkImage,
+          meeting: AppAssets.meetingDarkImage,
+          workShop: AppAssets.workShopDarkImage,
+          home: AppAssets.homeDarkImage,
         oB2: AppAssets.ob2DarkImage,
         oB3: AppAssets.ob3DarkImage,
-          Sport: AppAssets.sportDarkImage
+          sport: AppAssets.sportDarkImage
       ),
     ],
     textTheme: TextTheme(
@@ -88,10 +90,13 @@ class AppThemes {
         displayLarge: AppStyles.blackBold14,
         displayMedium: AppStyles.whiteMed16,
         bodySmall: AppStyles.whiteBold14,
-        labelSmall: AppStyles.whiteMed16
+        labelSmall: AppStyles.whiteMed16,
+        labelMedium: AppStyles.blackMed16
+
     ),
       appBarTheme: AppBarTheme(
         backgroundColor: AppColors.primaryColor,
+        iconTheme: IconThemeData(color: AppColors.primaryColor),
       ),
       floatingActionButtonTheme: FloatingActionButtonThemeData(
           backgroundColor: AppColors.primaryDarkColor,
@@ -112,43 +117,43 @@ class AppThemes {
 }
 
 class AppImages extends ThemeExtension<AppImages> {
-  final String Birthday;
+  final String birthday;
 
-  final String Sport;
+  final String sport;
 
-  final String BookClub;
+  final String bookClub;
 
-  final String Eating;
+  final String eating;
 
-  final String Exhibition;
+  final String exhibition;
 
-  final String Gaming;
+  final String gaming;
 
-  final String Holiday;
+  final String holiday;
 
-  final String Meeting;
+  final String meeting;
 
-  final String WorkShop;
+  final String workShop;
 
-  final String Home;
+  final String home;
 
   final String oB2;
 
   final String oB3;
 
   AppImages({
-    required this.Birthday,
-    required this.BookClub,
-    required this.Eating,
-    required this.Exhibition,
-    required this.Gaming,
-    required this.Holiday,
-    required this.Meeting,
-    required this.WorkShop,
-    required this.Home,
+    required this.birthday,
+    required this.bookClub,
+    required this.eating,
+    required this.exhibition,
+    required this.gaming,
+    required this.holiday,
+    required this.meeting,
+    required this.workShop,
+    required this.home,
     required this.oB2,
     required this.oB3,
-    required this.Sport
+    required this.sport
   });
 
   @override
@@ -167,18 +172,18 @@ class AppImages extends ThemeExtension<AppImages> {
     String? Sport
   }) {
     return AppImages(
-      Birthday: Birthday ?? this.Birthday,
-      BookClub: BookClub ?? this.BookClub,
-      Eating: Eating ?? this.Eating,
-      Exhibition: Exhibition ?? this.Exhibition,
-      Gaming: Gaming ?? this.Gaming,
-      Holiday: Holiday ?? this.Holiday,
-      Meeting: Meeting ?? this.Meeting,
-      WorkShop: WorkShop ?? this.WorkShop,
-      Home: Home ?? this.Home,
+        birthday: Birthday ?? this.birthday,
+        bookClub: BookClub ?? this.bookClub,
+        eating: Eating ?? this.eating,
+        exhibition: Exhibition ?? this.exhibition,
+        gaming: Gaming ?? this.gaming,
+        holiday: Holiday ?? this.holiday,
+        meeting: Meeting ?? this.meeting,
+        workShop: WorkShop ?? this.workShop,
+        home: Home ?? this.home,
       oB2: oB2 ?? this.oB2,
       oB3: oB3 ?? this.oB3,
-        Sport: Sport ?? this.Sport
+        sport: Sport ?? this.sport
     );
   }
 
