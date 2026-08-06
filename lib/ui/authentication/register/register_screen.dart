@@ -3,9 +3,12 @@ import 'package:evently/l10n/app_localizations.dart';
 import 'package:evently/ui/home/home_screen.dart';
 import 'package:evently/utils/app_assets.dart';
 import 'package:evently/utils/app_colors.dart';
+import 'package:evently/utils/app_const.dart';
 import 'package:evently/utils/app_styles.dart';
+import 'package:evently/wigets/custom_alert_dialog.dart';
 import 'package:evently/wigets/custom_elevated_button.dart';
 import 'package:evently/wigets/custom_text_form_field.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
@@ -173,14 +176,42 @@ class _RegisterScreenState extends State<RegisterScreen> {
     );
   }
 
-  void goToHomeScreen() {
+  void goToHomeScreen() async {
+    var appConst = AppConst(context);
     if (formKey.currentState!.validate()) {
       setState(() {});
-      Navigator.pushAndRemoveUntil(
-        context,
-        MaterialPageRoute(builder: (context) => HomeScreen()),
-        (route) => false,
-      );
+      CustomAlertDialog.showLoading(
+          context: context, msg: appConst.text.loading);
+      try {
+        final credential = await FirebaseAuth.instance
+            .createUserWithEmailAndPassword(
+          email: emailController.text,
+          password: passwordController.text,
+        );
+        CustomAlertDialog.hideLoading(context: context);
+        CustomAlertDialog.showMsg(
+            context: context, msg: appConst.text.register_Successfully);
+        Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(builder: (context) => HomeScreen()),
+              (route) => false,
+        );
+      } on FirebaseAuthException catch (e) {
+        if (e.code == 'weak-password') {
+          print('The password provided is too weak.');
+          CustomAlertDialog.hideLoading(context: context);
+          CustomAlertDialog.showMsg(context: context,
+              msg: appConst.text.the_password_provided_is_too_weak);
+        } else if (e.code == 'email-already-in-use') {
+          print('The account already exists for that email.');
+          CustomAlertDialog.hideLoading(context: context);
+          CustomAlertDialog.showMsg(context: context,
+              msg: appConst.text.the_account_already_exists_for_that_email);
+        }
+      } catch (e) {
+        print(e);
+      }
+
     }
   }
 

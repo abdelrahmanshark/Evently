@@ -78,7 +78,13 @@
   "please_enter_event_time": "please enter event time",
   "event_added": "Event Added",
   "event_added_to_favorite": "Event Added to favorite",
-  "event_removed_from_favorite": "Event Remove From Favorite"
+  "event_removed_from_favorite": "Event Remove From Favorite",
+  "loading": "Loading",
+  "register_Successfully": "Register Successfully",
+  "login_Successfully": "Login Successfully",
+  "the_password_provided_is_too_weak": "The password provided is too weak",
+  "the_account_already_exists_for_that_email": "The account already exists for that email.",
+  "wrong_email_or_password": "Wrong email or password"
 
 }
 

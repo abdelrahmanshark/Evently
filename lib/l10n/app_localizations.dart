@@ -577,6 +577,42 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Event Remove From Favorite'**
   String get event_removed_from_favorite;
+
+  /// No description provided for @loading.
+  ///
+  /// In en, this message translates to:
+  /// **'Loading'**
+  String get loading;
+
+  /// No description provided for @register_Successfully.
+  ///
+  /// In en, this message translates to:
+  /// **'Register Successfully'**
+  String get register_Successfully;
+
+  /// No description provided for @login_Successfully.
+  ///
+  /// In en, this message translates to:
+  /// **'Login Successfully'**
+  String get login_Successfully;
+
+  /// No description provided for @the_password_provided_is_too_weak.
+  ///
+  /// In en, this message translates to:
+  /// **'The password provided is too weak'**
+  String get the_password_provided_is_too_weak;
+
+  /// No description provided for @the_account_already_exists_for_that_email.
+  ///
+  /// In en, this message translates to:
+  /// **'The account already exists for that email.'**
+  String get the_account_already_exists_for_that_email;
+
+  /// No description provided for @wrong_email_or_password.
+  ///
+  /// In en, this message translates to:
+  /// **'Wrong email or password'**
+  String get wrong_email_or_password;
 }
 
 class _AppLocalizationsDelegate

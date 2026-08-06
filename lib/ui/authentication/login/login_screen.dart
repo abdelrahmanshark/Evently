@@ -5,14 +5,17 @@ import 'package:evently/utils/app_assets.dart';
 import 'package:evently/utils/app_colors.dart';
 import 'package:evently/utils/app_routes.dart';
 import 'package:evently/utils/app_styles.dart';
+import 'package:evently/wigets/custom_alert_dialog.dart';
 import 'package:evently/wigets/custom_elevated_button.dart';
 import 'package:evently/wigets/custom_text_form_field.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
 
 import '../../../providers/app_local_provider.dart';
 import '../../../providers/app_theme_provider.dart';
+import '../../../utils/app_const.dart';
 
 class LoginScreen extends StatefulWidget {
   LoginScreen({super.key});
@@ -216,13 +219,30 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  void Login() {
+  void Login() async {
+    var appConst = AppConst(context);
     if (formKey.currentState!.validate()) {
-      setState(() {
+      setState(() {});
+      CustomAlertDialog.showLoading(
+          context: context, msg: appConst.text.loading);
+      try {
+        final credential = await FirebaseAuth.instance
+            .signInWithEmailAndPassword(
+            email: emailController.text,
+            password: passwordController.text
+        );
+        CustomAlertDialog.hideLoading(context: context);
+        CustomAlertDialog.showMsg(
+            context: context, msg: appConst.text.login_Successfully);
+        Navigator.pushReplacement(
+            context, MaterialPageRoute(builder: (context) => HomeScreen(),));
+      } catch (e) {
+        print(e.toString());
+        CustomAlertDialog.hideLoading(context: context);
+        CustomAlertDialog.showMsg(
+            context: context, msg: appConst.text.wrong_email_or_password);
+      }
 
-      });
-      Navigator.pushReplacement(
-          context, MaterialPageRoute(builder: (context) => HomeScreen(),));
     }
   }
 
