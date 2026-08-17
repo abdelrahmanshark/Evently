@@ -18,7 +18,7 @@ class CustomAlertDialog {
           content: Row(
             children: [
               CircularProgressIndicator(color: AppColors.blackColor),
-              SizedBox(width: 10),
+              Spacer(),
               Text(msg, style: msgStyle ?? AppStyles.blackBold20),
             ],
           ),

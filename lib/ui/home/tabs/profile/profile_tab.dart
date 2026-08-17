@@ -7,7 +7,9 @@ import 'package:evently/utils/app_const.dart';
 import 'package:evently/utils/app_routes.dart';
 import 'package:evently/utils/app_styles.dart';
 import 'package:evently/wigets/custom_elevated_button.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../l10n/app_localizations.dart';
@@ -64,7 +66,7 @@ class _ProfileTabState extends State<ProfileTab> {
                   Text(
                     appConst.myUserProvider.currentUser?.name ?? '',
                     style: AppStyles.whiteBold24,
-                  )SizedBox(height: 6),
+                  ), SizedBox(height: 6),
                   Text(
                     appConst.myUserProvider.currentUser?.email ?? '',
                     style: AppStyles.whiteMed16,
@@ -99,7 +101,9 @@ class _ProfileTabState extends State<ProfileTab> {
                 child: Text(text.go_to_my_events, style: textStyle.bodyLarge,)),
             Spacer(),
             CustomElevatedButton(
-              onPressed: () {
+              onPressed: () async {
+                await FirebaseAuth.instance.signOut();
+                await GoogleSignIn.instance.signOut();
                 Navigator.pushAndRemoveUntil(context,
                   MaterialPageRoute(builder: (context) => LoginScreen(),), (
                       route) => false,);
