@@ -1,8 +1,10 @@
+import 'package:evently/providers/my_user_provider.dart';
 import 'package:evently/utils/app_colors.dart';
 import 'package:evently/utils/app_const.dart';
 import 'package:evently/utils/fire_base_utils.dart';
 import 'package:evently/wigets/custom_text_form_field.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../../../../models/events.dart';
 import '../home_tab/widgets/event_item.dart';
@@ -17,13 +19,14 @@ class FavoriteTab extends StatefulWidget {
 class _FavoriteTabState extends State<FavoriteTab> {
   List<Event> favoriteEventList = [];
   List<Event> filteredEvents = [];
+  List<Event> favoriteEventsFromFireBase = [];
   TextEditingController? searchController = TextEditingController();
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    getFavoriteEvents();
+    loadFavoriteList();
   }
   @override
   Widget build(BuildContext context) {
@@ -51,7 +54,9 @@ class _FavoriteTabState extends State<FavoriteTab> {
                         EventItem(
                             event: searchController!.text.isEmpty
                                 ? favoriteEventList[index]
-                                : filteredEvents[index]),
+                                : filteredEvents[index],
+                          favoriteEventsFromFireBase: favoriteEventsFromFireBase,
+                        ),
 
                     itemCount: searchController!.text.isEmpty
                         ? favoriteEventList.length
@@ -64,22 +69,19 @@ class _FavoriteTabState extends State<FavoriteTab> {
     );
   }
 
-  void getFavoriteEvents() {
-    FireBaseUtils.getFireBaseEventsCollection().snapshots().listen(
-          (event) {
-        setState(() {
-          favoriteEventList = event.docs.map((event) {
-            return event.data();
-          },).where((event) {
-            return event.isFavorite == true;
-          },).toList();
-        });
-      },
-    );
 
-
+  void loadFavoriteList() {
+    var myUserProvider = Provider.of<MyUserProvider>(context, listen: false);
+    FireBaseUtils.getFireBaseUsersFavoriteEventsCollection(
+        myUserProvider.currentUser!.id!).snapshots().listen((event) {
+      setState(() {
+        favoriteEventsFromFireBase = event.docs.map((e) {
+          return e.data();
+        },).toList();
+        favoriteEventList = favoriteEventsFromFireBase;
+      });
+    },);
   }
-
   void searchEvents() {
     filteredEvents.clear();
     for (var event in favoriteEventList) {

@@ -12,6 +12,8 @@ import 'package:evently/utils/fire_base_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../../../providers/my_user_provider.dart';
+
 class HomeTab extends StatefulWidget {
   HomeTab({super.key});
 
@@ -25,8 +27,21 @@ class HomeTabState extends State<HomeTab> {
     // TODO: implement initState
     super.initState();
     getAllEvents();
+    loadFavoriteList();
   }
 
+  List<String> eventCatagory = [
+    'sport',
+    'birthday',
+    'meeting',
+    'gaming',
+    'eating',
+    'holiday',
+    'exhibition',
+    'workShop',
+    'book_club',
+  ];
+  List<Event> favoriteEventsFromFireBase = [];
   List<Event> eventsList = [];
   int currentIndex = 0;
   List<EventTabItem> eventsTabItems = [];
@@ -147,7 +162,8 @@ class HomeTabState extends State<HomeTab> {
           Expanded(
             child: ListView.builder(
                 itemBuilder: (context, index) =>
-                    EventItem(event: eventsList[index],),
+                    EventItem(event: eventsList[index],
+                      favoriteEventsFromFireBase: favoriteEventsFromFireBase,),
                 itemCount: eventsList.length),
           )
         ],
@@ -180,9 +196,21 @@ class HomeTabState extends State<HomeTab> {
         }
         else {
           eventsList = allEvents.where((event) {
-            return event.eventName == eventsTabItems[currentIndex].eventName;
+            return event.eventName == eventCatagory[currentIndex];
           },).toList();
         }
+      });
+    },);
+  }
+
+  void loadFavoriteList() {
+    var myUserProvider = Provider.of<MyUserProvider>(context, listen: false);
+    FireBaseUtils.getFireBaseUsersFavoriteEventsCollection(
+        myUserProvider.currentUser!.id!).snapshots().listen((event) {
+      setState(() {
+        favoriteEventsFromFireBase = event.docs.map((e) {
+          return e.data();
+        },).toList();
       });
     },);
   }

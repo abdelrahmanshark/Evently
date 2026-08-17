@@ -18,12 +18,13 @@ class MyEvents extends StatefulWidget {
 
 class _MyEventsState extends State<MyEvents> {
   List<Event> myEvents = [];
-
+  List<Event> favoriteEventsFromFireBase = [];
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     getMyEvents();
+    loadFavoriteList();
   }
 
   @override
@@ -43,7 +44,9 @@ class _MyEventsState extends State<MyEvents> {
               : Expanded(
                   child: ListView.builder(
                     itemBuilder: (context, index) =>
-                        EventItem(event: myEvents[index], isItMyEvent: true),
+                        EventItem(event: myEvents[index],
+                          favoriteEventsFromFireBase: favoriteEventsFromFireBase,
+                          isItMyEvent: true,),
                     itemCount: myEvents.length,
                   ),
                 ),
@@ -63,5 +66,17 @@ class _MyEventsState extends State<MyEvents> {
         }).toList();
       });
     });
+  }
+
+  void loadFavoriteList() {
+    var myUserProvider = Provider.of<MyUserProvider>(context, listen: false);
+    FireBaseUtils.getFireBaseUsersFavoriteEventsCollection(
+        myUserProvider.currentUser!.id!).snapshots().listen((event) {
+      setState(() {
+        favoriteEventsFromFireBase = event.docs.map((e) {
+          return e.data();
+        },).toList();
+      });
+    },);
   }
 }

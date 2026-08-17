@@ -152,7 +152,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   ],
                 ),
                 CustomElevatedButton(
-                  onPressed: () {},
+                  onPressed: loginWithGoogle,
                   backGroundColor: Colors.transparent,
                   borderColor: AppColors.primaryColor,
                   child: Row(
@@ -239,9 +239,9 @@ class _LoginScreenState extends State<LoginScreen> {
           CustomAlertDialog.hideLoading(context: context);
           return;
         }
-        MyUsers newUser = await FireBaseUtils.getUser(
+        MyUsers? newUser = await FireBaseUtils.getUser(
             userId: credential.user!.uid);
-        myUserProvider.updateUser(newUser);
+        myUserProvider.updateUser(newUser!);
         CustomAlertDialog.hideLoading(context: context);
         CustomAlertDialog.showMsg(
             context: context, msg: appConst.text.login_Successfully);
@@ -259,5 +259,22 @@ class _LoginScreenState extends State<LoginScreen> {
 
   void goToRegisterScreen() {
     Navigator.of(context).pushNamed(AppRoutes.registerScreensRouteName);
+  }
+
+
+  Future<void> loginWithGoogle() async {
+    var myUserProvider = Provider.of<MyUserProvider>(context, listen: false);
+    var googleUser = await FireBaseUtils.signInWithGoogle();
+    MyUsers newUser = MyUsers(id: googleUser.user?.uid,
+        name: googleUser.user?.displayName,
+        email: googleUser.user?.email);
+    var currentUser = await FireBaseUtils.getUser(userId: newUser.id!);
+    if (currentUser == null) {
+      await FireBaseUtils.setUser(newUser);
+      myUserProvider.updateUser(newUser);
+    }
+    myUserProvider.updateUser(newUser);
+    Navigator.pushReplacement(
+        context, MaterialPageRoute(builder: (context) => HomeScreen(),));
   }
 }
