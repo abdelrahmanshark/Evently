@@ -1,28 +1,37 @@
 import 'package:evently/providers/app_local_provider.dart';
 import 'package:evently/providers/app_theme_provider.dart';
+import 'package:evently/providers/my_user_provider.dart';
 import 'package:evently/ui/authentication/login/login_screen.dart';
 import 'package:evently/ui/authentication/register/register_screen.dart';
+import 'package:evently/ui/home/add_event/add_event.dart';
 import 'package:evently/ui/home/home_screen.dart';
+import 'package:evently/ui/home/tabs/profile/my_events.dart';
 import 'package:evently/ui/home/tabs/profile/profile_tab.dart';
 import 'package:evently/ui/on_boarding/init_screen/init_screen.dart';
 import 'package:evently/ui/on_boarding/intro_screens/introduction_screens.dart';
 import 'package:evently/utils/app_routes.dart';
 import 'package:evently/utils/app_themes.dart';
 import 'package:evently/utils/shared_preferences.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'firebase_options.dart';
 import 'l10n/app_localizations.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   bool isSeen = await chackedIsIntroSeen();
   runApp(
     MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => AppLocalProvider()),
         ChangeNotifierProvider(create: (_) => AppThemeProvider()),
+        ChangeNotifierProvider(create: (_) => MyUserProvider()),
       ],
       child: Evently(isSeen: isSeen),
     ),
@@ -62,6 +71,8 @@ class Evently extends StatelessWidget {
         AppRoutes.profileTabRouteName: (context) => ProfileTab(),
         AppRoutes.homeScreenRouteName: (context) => HomeScreen(),
         AppRoutes.registerScreensRouteName: (context) => RegisterScreen(),
+        AppRoutes.addEventScreenRouteName: (context) => AddEvent(),
+        AppRoutes.myEventsRouteName: (context) => MyEvents(),
       },
     );
   }

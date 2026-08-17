@@ -1,17 +1,23 @@
 import 'package:animated_toggle_switch/animated_toggle_switch.dart';
 import 'package:evently/l10n/app_localizations.dart';
+import 'package:evently/models/user.dart';
 import 'package:evently/ui/home/home_screen.dart';
 import 'package:evently/utils/app_assets.dart';
 import 'package:evently/utils/app_colors.dart';
+import 'package:evently/utils/app_const.dart';
 import 'package:evently/utils/app_styles.dart';
+import 'package:evently/utils/fire_base_utils.dart';
+import 'package:evently/wigets/custom_alert_dialog.dart';
 import 'package:evently/wigets/custom_elevated_button.dart';
 import 'package:evently/wigets/custom_text_form_field.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
 
 import '../../../providers/app_local_provider.dart';
 import '../../../providers/app_theme_provider.dart';
+import '../../../providers/my_user_provider.dart';
 
 class RegisterScreen extends StatefulWidget {
   RegisterScreen({super.key});
@@ -173,14 +179,54 @@ class _RegisterScreenState extends State<RegisterScreen> {
     );
   }
 
-  void goToHomeScreen() {
+  void goToHomeScreen() async {
+    var myUserProvider = Provider.of<MyUserProvider>(context, listen: false);
+    var appConst = AppConst(context);
     if (formKey.currentState!.validate()) {
       setState(() {});
-      Navigator.pushAndRemoveUntil(
-        context,
-        MaterialPageRoute(builder: (context) => HomeScreen()),
-        (route) => false,
-      );
+      CustomAlertDialog.showLoading(
+          context: context, msg: appConst.text.loading);
+      try {
+        final credential = await FirebaseAuth.instance
+            .createUserWithEmailAndPassword(
+          email: emailController.text,
+          password: passwordController.text,
+        );
+        if (credential.user?.uid == null) {
+          CustomAlertDialog.hideLoading(context: context);
+          return;
+        }
+        MyUsers newUser = MyUsers(id: credential.user!.uid,
+            name: nameController.text,
+            email: emailController.text);
+        await FireBaseUtils.setUser(newUser);
+        CustomAlertDialog.hideLoading(context: context);
+        CustomAlertDialog.showMsg(
+            context: context, msg: appConst.text.register_Successfully);
+
+
+        myUserProvider.updateUser(newUser);
+        Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(builder: (context) => HomeScreen()),
+              (route) => false,
+        );
+      } on FirebaseAuthException catch (e) {
+        if (e.code == 'weak-password') {
+          print('The password provided is too weak.');
+          CustomAlertDialog.hideLoading(context: context);
+          CustomAlertDialog.showMsg(context: context,
+              msg: appConst.text.the_password_provided_is_too_weak);
+        } else if (e.code == 'email-already-in-use') {
+          print('The account already exists for that email.');
+          CustomAlertDialog.hideLoading(context: context);
+          CustomAlertDialog.showMsg(context: context,
+              msg: appConst.text.the_account_already_exists_for_that_email);
+        }
+      } catch (e) {
+        print(e);
+      }
+
     }
   }
 

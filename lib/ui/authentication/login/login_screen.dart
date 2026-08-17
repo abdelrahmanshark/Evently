@@ -1,18 +1,24 @@
 import 'package:animated_toggle_switch/animated_toggle_switch.dart';
 import 'package:evently/l10n/app_localizations.dart';
+import 'package:evently/models/user.dart';
+import 'package:evently/providers/my_user_provider.dart';
 import 'package:evently/ui/home/home_screen.dart';
 import 'package:evently/utils/app_assets.dart';
 import 'package:evently/utils/app_colors.dart';
 import 'package:evently/utils/app_routes.dart';
 import 'package:evently/utils/app_styles.dart';
+import 'package:evently/utils/fire_base_utils.dart';
+import 'package:evently/wigets/custom_alert_dialog.dart';
 import 'package:evently/wigets/custom_elevated_button.dart';
 import 'package:evently/wigets/custom_text_form_field.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
 
 import '../../../providers/app_local_provider.dart';
 import '../../../providers/app_theme_provider.dart';
+import '../../../utils/app_const.dart';
 
 class LoginScreen extends StatefulWidget {
   LoginScreen({super.key});
@@ -146,7 +152,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   ],
                 ),
                 CustomElevatedButton(
-                  onPressed: () {},
+                  onPressed: loginWithGoogle,
                   backGroundColor: Colors.transparent,
                   borderColor: AppColors.primaryColor,
                   child: Row(
@@ -216,17 +222,59 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  void Login() {
+  void Login() async {
+    var myUserProvider = Provider.of<MyUserProvider>(context, listen: false);
+    var appConst = AppConst(context);
     if (formKey.currentState!.validate()) {
-      setState(() {
+      setState(() {});
+      CustomAlertDialog.showLoading(
+          context: context, msg: appConst.text.loading);
+      try {
+        final credential = await FirebaseAuth.instance
+            .signInWithEmailAndPassword(
+            email: emailController.text,
+            password: passwordController.text
+        );
+        if (credential.user?.uid == null) {
+          CustomAlertDialog.hideLoading(context: context);
+          return;
+        }
+        MyUsers? newUser = await FireBaseUtils.getUser(
+            userId: credential.user!.uid);
+        myUserProvider.updateUser(newUser!);
+        CustomAlertDialog.hideLoading(context: context);
+        CustomAlertDialog.showMsg(
+            context: context, msg: appConst.text.login_Successfully);
+        Navigator.pushReplacement(
+            context, MaterialPageRoute(builder: (context) => HomeScreen(),));
+      } catch (e) {
+        print(e.toString());
+        CustomAlertDialog.hideLoading(context: context);
+        CustomAlertDialog.showMsg(
+            context: context, msg: appConst.text.wrong_email_or_password);
+      }
 
-      });
-      Navigator.pushReplacement(
-          context, MaterialPageRoute(builder: (context) => HomeScreen(),));
     }
   }
 
   void goToRegisterScreen() {
     Navigator.of(context).pushNamed(AppRoutes.registerScreensRouteName);
+  }
+
+
+  Future<void> loginWithGoogle() async {
+    var myUserProvider = Provider.of<MyUserProvider>(context, listen: false);
+    var googleUser = await FireBaseUtils.signInWithGoogle();
+    MyUsers newUser = MyUsers(id: googleUser.user?.uid,
+        name: googleUser.user?.displayName,
+        email: googleUser.user?.email);
+    var currentUser = await FireBaseUtils.getUser(userId: newUser.id!);
+    if (currentUser == null) {
+      await FireBaseUtils.setUser(newUser);
+      myUserProvider.updateUser(newUser);
+    }
+    myUserProvider.updateUser(newUser);
+    Navigator.pushReplacement(
+        context, MaterialPageRoute(builder: (context) => HomeScreen(),));
   }
 }
